@@ -1,6 +1,7 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
 target 'TFFormDescriptor', :exclusive => true do
+  pod 'TFTableDescriptor', :path => "../../TFTableDescriptor"
   pod "TFFormDescriptor", :path => "../"
 end
 

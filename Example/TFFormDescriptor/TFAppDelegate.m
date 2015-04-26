@@ -7,12 +7,16 @@
 //
 
 #import "TFAppDelegate.h"
+#import <TFTextField.h>
 
 @implementation TFAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    [[TFTextField appearance] setBackgroundColor:[UIColor blueColor]];
+    
     return YES;
 }
 							
