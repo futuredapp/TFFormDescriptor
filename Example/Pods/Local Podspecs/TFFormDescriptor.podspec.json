@@ -1,0 +1,26 @@
+{
+  "name": "TFFormDescriptor",
+  "version": "0.1.0",
+  "summary": "A short description of TFFormDescriptor.",
+  "description": "                       An optional longer description of TFFormDescriptor\n\n                       * Markdown format.\n                       * Don't worry about the indent, we strip it!\n",
+  "homepage": "https://github.com/<GITHUB_USERNAME>/TFFormDescriptor",
+  "license": "MIT",
+  "authors": {
+    "Ales Kocur": "aleskocur@icloud.com"
+  },
+  "source": {
+    "git": "https://github.com/<GITHUB_USERNAME>/TFFormDescriptor.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "7.0"
+  },
+  "requires_arc": true,
+  "source_files": "Pod/Classes/**/*.{h,m}",
+  "resources": "Pod/Classes/**/*.{xib}",
+  "dependencies": {
+    "TFTableDescriptor": [
+      "~> 1.2.0"
+    ]
+  }
+}
