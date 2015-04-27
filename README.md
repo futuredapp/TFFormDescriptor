@@ -1,6 +1,6 @@
 # TFFormDescriptor
 
-[![CI Status](http://img.shields.io/travis/Ales Kocur/TFFormDescriptor.svg?style=flat)](https://travis-ci.org/Ales Kocur/TFFormDescriptor)
+[![Build Status](https://travis-ci.org/thefuntasty/TFFormDescriptor.svg?branch=master)](https://travis-ci.org/thefuntasty/TFFormDescriptor)
 [![Version](https://img.shields.io/cocoapods/v/TFFormDescriptor.svg?style=flat)](http://cocoapods.org/pods/TFFormDescriptor)
 [![License](https://img.shields.io/cocoapods/l/TFFormDescriptor.svg?style=flat)](http://cocoapods.org/pods/TFFormDescriptor)
 [![Platform](https://img.shields.io/cocoapods/p/TFFormDescriptor.svg?style=flat)](http://cocoapods.org/pods/TFFormDescriptor)
