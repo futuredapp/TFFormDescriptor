@@ -27,8 +27,14 @@ typedef NS_ENUM(TFFormAction, TFFormActionState) {
 
 @interface TFFormBaseField : TFBasicDescriptedCell<TFFormBaseCellProtocol>
 
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *leftPadding;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *rightPadding;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *topPadding;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *bottomPadding;
+
 - (void)triggerAction:(TFFormAction)formAction;
 
 - (void)setBackgroundColor:(UIColor *)backgroundColor UI_APPEARANCE_SELECTOR;
+- (void)setContentPadding:(UIEdgeInsets)contentPadding UI_APPEARANCE_SELECTOR;
 
 @end

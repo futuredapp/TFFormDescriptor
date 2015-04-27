@@ -15,6 +15,10 @@
 
 + (TFRowConfiguration *)configurationWithTitle:(NSString *)title placeholder:(NSString *)placeholder value:(NSString *)value;
 
+- (void)setTextFieldFont:(UIFont *)font UI_APPEARANCE_SELECTOR;
+- (void)setTextFieldTextColor:(UIColor *)textColor UI_APPEARANCE_SELECTOR;
+- (void)setTextFieldTextAlignment:(NSTextAlignment)textAlignment UI_APPEARANCE_SELECTOR;
+- (void)setTextFieldBorderStyle:(UITextBorderStyle)borderStyle UI_APPEARANCE_SELECTOR;
 
 
 @end

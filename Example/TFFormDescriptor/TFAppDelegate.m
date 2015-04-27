@@ -25,6 +25,11 @@
     [[TFFormTitledSwitchField appearance] setSwitchOnTintColor:[UIColor redColor]];
     [[TFFormTitledSwitchField appearance] setTitleLabelFont:[UIFont fontWithName:@"HelveticaNeue-Medium" size:5.0]];
     
+    [[TFFormTitledTextField appearance] setContentPadding:UIEdgeInsetsMake(10, 15, 10, 15)];
+    [[TFFormTitledTextField appearance] setTextFieldTextColor:[UIColor whiteColor]];
+    [[TFFormTitledTextField appearance] setTextFieldBorderStyle:UITextBorderStyleNone];
+    [[TFFormTitledTextField appearance] setTextFieldTextAlignment:NSTextAlignmentRight];
+    
     return YES;
 }
 							

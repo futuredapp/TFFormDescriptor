@@ -52,5 +52,20 @@
 }
 
 
+- (void)setTextFieldFont:(UIFont *)font UI_APPEARANCE_SELECTOR{
+    self.textField.font = font;
+}
+
+- (void)setTextFieldTextColor:(UIColor *)textColor UI_APPEARANCE_SELECTOR{
+    self.textField.textColor = textColor;
+}
+
+- (void)setTextFieldTextAlignment:(NSTextAlignment)textAlignment UI_APPEARANCE_SELECTOR{
+    self.textField.textAlignment = textAlignment;
+}
+
+- (void)setTextFieldBorderStyle:(UITextBorderStyle)borderStyle UI_APPEARANCE_SELECTOR{
+    self.textField.borderStyle = borderStyle;
+}
 
 @end
