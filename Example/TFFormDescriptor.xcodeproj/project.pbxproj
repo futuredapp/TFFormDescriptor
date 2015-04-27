@@ -130,11 +130,10 @@
 		6003F593195388D20070C39A /* TFFormDescriptor */ = {
 			isa = PBXGroup;
 			children = (
+				EE79C1671AEE6BAE00110A0C /* Examples */,
 				6003F59C195388D20070C39A /* TFAppDelegate.h */,
 				6003F59D195388D20070C39A /* TFAppDelegate.m */,
 				9021972F1AECF0FB009B33FA /* Main.storyboard */,
-				6003F5A5195388D20070C39A /* TFViewController.h */,
-				6003F5A6195388D20070C39A /* TFViewController.m */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
@@ -190,6 +189,23 @@
 				37CF475BD83250080B773CA6 /* Pods-Tests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		EE79C1671AEE6BAE00110A0C /* Examples */ = {
+			isa = PBXGroup;
+			children = (
+				EE79C1681AEE6BB800110A0C /* Basic */,
+			);
+			name = Examples;
+			sourceTree = "<group>";
+		};
+		EE79C1681AEE6BB800110A0C /* Basic */ = {
+			isa = PBXGroup;
+			children = (
+				6003F5A5195388D20070C39A /* TFViewController.h */,
+				6003F5A6195388D20070C39A /* TFViewController.m */,
+			);
+			name = Basic;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
