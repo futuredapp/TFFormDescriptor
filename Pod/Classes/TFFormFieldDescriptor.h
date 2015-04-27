@@ -6,17 +6,18 @@
 //
 //
 
-#import "TFRowDescriptor.h"
 #import <TFRowDescriptor.h>
-#import "TFFormBasicCell.h"
+#import "TFFormBaseField.h"
+#import "TFRowDescriptor+FormRowReference.h"
 
 @class TFFormSectionDescriptor;
 
-@interface TFFormRowDescriptor : NSObject
+@interface TFFormFieldDescriptor : NSObject
 
 @property (strong, nonatomic) TFRowDescriptor *rowDescriptor;
 @property (weak, nonatomic) TFFormSectionDescriptor *formSectionDescriptor;
 @property (strong, nonatomic) id value;
 
 + (instancetype)descriptorWithClass:(Class)c configuration:(TFRowConfiguration *)cfg tag:(NSString *)tag;
+
 @end

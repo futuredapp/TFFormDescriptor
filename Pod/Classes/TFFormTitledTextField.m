@@ -6,9 +6,9 @@
 //
 //
 
-#import "TFTextField.h"
+#import "TFFormTitledTextField.h"
 
-@implementation TFTextField
+@implementation TFFormTitledTextField
 
 
 - (void)awakeFromNib {
@@ -21,13 +21,10 @@
     // Configure the view for the selected state
 }
 
-- (void)setBackgroundColor:(UIColor *)backgroundColor {
-    self.contentView.backgroundColor = backgroundColor;
-}
 
 + (TFRowConfiguration *)configurationWithTitle:(NSString *)title placeholder:(NSString *)placeholder value:(NSString *)value {
     
-    return [TFRowConfiguration configuration:^(TFTextField *configuration) {
+    return [TFRowConfiguration configurationWithBlock:^(TFFormTitledTextField *configuration) {
         configuration.titleLabel.text = title;
         configuration.textField.placeholder = placeholder;
         configuration.textField.text = value;
@@ -49,6 +46,11 @@
 + (NSNumber *)height {
     return @40;
 }
+
+- (IBAction)valueDidChange:(id)sender {
+    [self triggerAction:TFFormActionStateValueDidChange];
+}
+
 
 
 @end

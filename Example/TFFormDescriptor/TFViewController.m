@@ -9,7 +9,10 @@
 #import "TFViewController.h"
 #import <TFFormDescriptor.h>
 
-@interface TFViewController ()
+static NSString * const kFieldTagTextField = @"TextFieldTag";
+static NSString * const kFieldTagSwitch = @"SwitchFieldTag";
+
+@interface TFViewController ()<TFFormDescriptorDelegate>
 
 @property TFFormDescriptor *formDescriptor;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -26,20 +29,42 @@
     
     TFFormSectionDescriptor *section = [TFFormSectionDescriptor descriptorWithTag:0 data:nil];
     
-    TFFormRowDescriptor *textField = [TFFormRowDescriptor descriptorWithClass:[TFTextField class] configuration:[TFTextField configurationWithTitle:@"Name" placeholder:@"Your name" value:@"Alonso"] tag:@"TextFieldTag"];
+    TFFormFieldDescriptor *textField = [TFFormFieldDescriptor descriptorWithClass:[TFFormTitledTextField class] configuration:[TFFormTitledTextField configurationWithTitle:@"Name" placeholder:@"Your name" value:@"Alonso"] tag:kFieldTagTextField];
     
     [section addRow:textField];
+    
+    TFFormFieldDescriptor *switchField = [TFFormFieldDescriptor descriptorWithClass:[TFFormTitledSwitchField class] configuration:[TFFormTitledSwitchField configurationWithTitle:@"Are you sure?" value:YES] tag:kFieldTagSwitch];
+    
+    [section addRow:switchField];
+    
     [form addSection:section];
     
     self.formDescriptor = form;
     
-	// Do any additional setup after loading the view, typically from a nib.
+    self.formDescriptor.delegate = self;
+    
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (IBAction)printValues:(id)sender {
+
+    NSLog(@"%@", [self.formDescriptor allValues]);
+
 }
+
+#pragma mark - TFFormDescriptor delegate
+
+- (void)formDescriptor:(TFFormDescriptor *)formDescriptor didTriggerAction:(TFFormAction)formAction field:(TFFormFieldDescriptor *)field tag:(NSString *)tag {
+    
+    if (formAction == TFFormActionStateValueDidChange) {
+        
+        if ([tag isEqualToString:kFieldTagSwitch]) {
+            NSLog(@"Value did change: %@", [self.formDescriptor valueAtField:field]);
+        }
+    } else if (formAction == TFFormActionSwitchTRLALA) {
+        
+    }
+    
+}
+
 
 @end

@@ -7,15 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <TFFormBasicCell.h>
+#import "TFFormTitledBaseField.h"
 
-@interface TFTextField : TFFormBasicCell
+@interface TFFormTitledTextField : TFFormTitledBaseField
 
 @property (strong, nonatomic) IBOutlet UITextField *textField;
-@property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 
 + (TFRowConfiguration *)configurationWithTitle:(NSString *)title placeholder:(NSString *)placeholder value:(NSString *)value;
 
-- (void)setBackgroundColor:(UIColor *)backgroundColor UI_APPEARANCE_SELECTOR;
+
 
 @end

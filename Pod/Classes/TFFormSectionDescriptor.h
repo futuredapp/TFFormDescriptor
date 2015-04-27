@@ -8,15 +8,16 @@
 
 #import "TFSectionDescriptor.h"
 
-@class TFFormRowDescriptor;
+@class TFFormFieldDescriptor, TFFormDescriptor;
 
 @interface TFFormSectionDescriptor : NSObject
 
 @property (strong, nonatomic) TFSectionDescriptor *sectionDescriptor;
+@property (weak, nonatomic) TFFormDescriptor *formDescriptor;
 
 + (instancetype)descriptorWithClass:(Class)c tag:(NSInteger)tag data:(id)data;
 + (instancetype)descriptorWithTag:(NSInteger)tag data:(id)data;
 
-- (void)addRow:(TFFormRowDescriptor *)formRowDescriptor;
+- (void)addRow:(TFFormFieldDescriptor *)formRowDescriptor;
 
 @end

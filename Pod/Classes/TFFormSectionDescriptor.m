@@ -7,7 +7,7 @@
 //
 
 #import "TFFormSectionDescriptor.h"
-#import <TFFormRowDescriptor.h>
+#import <TFFormFieldDescriptor.h>
 
 static TFSectionDescriptor * defaultDescriptor = nil;
 
@@ -42,7 +42,7 @@ static TFSectionDescriptor * defaultDescriptor = nil;
     defaultDescriptor.sectionClass = c;
 }
 
-- (void)addRow:(TFFormRowDescriptor *)formRowDescriptor {
+- (void)addRow:(TFFormFieldDescriptor *)formRowDescriptor {
     [self.sectionDescriptor addRow:formRowDescriptor.rowDescriptor];
     formRowDescriptor.formSectionDescriptor = self;
 }

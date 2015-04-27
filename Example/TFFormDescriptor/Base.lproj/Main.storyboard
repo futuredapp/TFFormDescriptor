@@ -47,7 +47,13 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" id="zuw-Gg-jCk"/>
+                    <navigationItem key="navigationItem" id="zuw-Gg-jCk">
+                        <barButtonItem key="rightBarButtonItem" title="Print values" id="q64-3P-zDS">
+                            <connections>
+                                <action selector="printValues:" destination="tJ2-ys-mP7" id="6Xj-QA-ULh"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="BBN-d5-0J4" id="EID-SW-vAn"/>
                     </connections>

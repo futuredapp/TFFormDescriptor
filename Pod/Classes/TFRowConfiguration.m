@@ -10,7 +10,7 @@
 
 @implementation TFRowConfiguration
 
-+ (instancetype)configuration:(configurationBlock)configurationBlock {
++ (instancetype)configurationWithBlock:(configurationBlock)configurationBlock {
     TFRowConfiguration *cfg = [[TFRowConfiguration alloc] init];
     cfg.configuration = configurationBlock;
     return cfg;

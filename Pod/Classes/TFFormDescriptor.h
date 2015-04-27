@@ -6,19 +6,21 @@
 //
 //
 
-#import "TFFormRowDescriptor.h"
+#import "TFFormFieldDescriptor.h"
 #import "TFFormSectionDescriptor.h"
 
 // Fields
-#import "TFTextField.h"
+#import "TFFormTitledTextField.h"
+#import "TFFormTitledSwitchField.h"
 
 @class TFFormDescriptor;
 
 @protocol TFFormDescriptorDelegate <NSObject>
 
-- (void)formDescriptor:(TFFormDescriptor *)formDescriptor didTriggerAction:(TFRowAction *)rowAction;
+- (void)formDescriptor:(TFFormDescriptor *)formDescriptor didTriggerAction:(TFFormAction)formAction field:(TFFormFieldDescriptor *)field tag:(NSString *)tag;
 
 @end
+
 
 @interface TFFormDescriptor : NSObject
 
@@ -31,5 +33,13 @@
 #pragma mark - Adding sections
 
 - (void)addSection:(TFFormSectionDescriptor *)formSectionDescriptor;
+
+#pragma mark - Getting values
+
+- (id)valueAtFieldWithTag:(NSString *)tag;
+- (id)valueAtField:(TFFormFieldDescriptor *)fieldDescriptor;
+
+/// Values in dictionary where key is row tag
+- (NSDictionary *)allValues;
 
 @end

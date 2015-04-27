@@ -14,6 +14,6 @@ typedef void (^configurationBlock)(id configuration);
 
 @property (strong, nonatomic) configurationBlock configuration;
 
-+ (instancetype)configuration:(configurationBlock)configurationBlock;
++ (instancetype)configurationWithBlock:(configurationBlock)configurationBlock;
 
 @end

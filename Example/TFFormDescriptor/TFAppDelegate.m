@@ -7,15 +7,23 @@
 //
 
 #import "TFAppDelegate.h"
-#import <TFTextField.h>
+#import <TFFormTitledTextField.h>
+#import <TFFormTitledBaseField.h>
+#import <TFFormGlobalAppearance.h>
+#import <TFFormTitledSwitchField.h>
 
 @implementation TFAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+
     
-    [[TFTextField appearance] setBackgroundColor:[UIColor blueColor]];
+    [[TFFormTitledBaseField appearance] setTitleLabelFont:[UIFont systemFontOfSize:15.0]];
+    [[TFFormTitledTextField appearance] setBackgroundColor:[UIColor blueColor]];
+    [[TFFormGlobalAppearance appearance] setDefaultFont:[UIFont fontWithName:@"HelveticaNeue-Thin" size:11.0]];
+    [[TFFormTitledSwitchField appearance] setSwitchOnTintColor:[UIColor redColor]];
+    [[TFFormTitledSwitchField appearance] setTitleLabelFont:[UIFont fontWithName:@"HelveticaNeue-Medium" size:5.0]];
     
     return YES;
 }
