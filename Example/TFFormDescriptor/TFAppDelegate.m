@@ -11,6 +11,7 @@
 #import <TFFormTitledBaseField.h>
 #import <TFFormGlobalAppearance.h>
 #import <TFFormTitledSwitchField.h>
+#import <TFFormTitledTextViewField.h>
 
 @implementation TFAppDelegate
 
@@ -23,12 +24,18 @@
     [[TFFormTitledTextField appearance] setBackgroundColor:[UIColor blueColor]];
     [[TFFormGlobalAppearance appearance] setDefaultFont:[UIFont fontWithName:@"HelveticaNeue-Thin" size:11.0]];
     [[TFFormTitledSwitchField appearance] setSwitchOnTintColor:[UIColor redColor]];
-    [[TFFormTitledSwitchField appearance] setTitleLabelFont:[UIFont fontWithName:@"HelveticaNeue-Medium" size:5.0]];
+    [[TFFormTitledSwitchField appearance] setSwitchTintColor:[UIColor greenColor]];
+    [[TFFormTitledSwitchField appearance] setTitleLabelFont:[UIFont fontWithName:@"HelveticaNeue-Medium" size:10.0]];
+    [[TFFormTitledSwitchField appearance] setContentPadding:UIEdgeInsetsMake(6, 50, 6, 15)];
+    [[TFFormTitledSwitchField appearance] setSwitchThumbTintColor:[UIColor blackColor]];
     
     [[TFFormTitledTextField appearance] setContentPadding:UIEdgeInsetsMake(10, 15, 10, 15)];
     [[TFFormTitledTextField appearance] setTextFieldTextColor:[UIColor whiteColor]];
     [[TFFormTitledTextField appearance] setTextFieldBorderStyle:UITextBorderStyleNone];
     [[TFFormTitledTextField appearance] setTextFieldTextAlignment:NSTextAlignmentRight];
+    [[TFFormTitledTextField appearance] setTextFieldPlaceholderAttributes:@{ NSForegroundColorAttributeName : [UIColor redColor] }];
+    
+    [[TFFormTitledTextViewField appearance] setBackgroundColor:[UIColor purpleColor]];
     
     return YES;
 }

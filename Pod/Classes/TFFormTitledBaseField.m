@@ -10,6 +10,9 @@
 
 @implementation TFFormTitledBaseField
 
+
+#pragma mark - UIAppearance
+
 - (void)setTitleLabelFont:(UIFont *)font UI_APPEARANCE_SELECTOR {
     self.titleLabel.font = font;
 }

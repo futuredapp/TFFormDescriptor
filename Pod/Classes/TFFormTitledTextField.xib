@@ -25,6 +25,7 @@
                         <textInputTraits key="textInputTraits"/>
                         <connections>
                             <action selector="valueDidChange:" destination="KGk-i7-Jjw" eventType="valueChanged" id="G1W-uN-3c9"/>
+                            <outlet property="delegate" destination="KGk-i7-Jjw" id="dkZ-uc-L7l"/>
                         </connections>
                     </textField>
                 </subviews>

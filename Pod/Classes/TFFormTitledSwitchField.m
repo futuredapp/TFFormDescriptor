@@ -44,7 +44,7 @@
 }
 
 - (IBAction)valueDidChange:(id)sender {
-    [self triggerAction:TFFormActionSwitchTRLALA];
+    [self triggerAction:TFFormActionStateValueDidChange];
 }
 
 #pragma mark - UIAppearance
@@ -55,6 +55,10 @@
 
 - (void)setSwitchOnTintColor:(UIColor *)color {
     [self.switchControl setOnTintColor:color];
+}
+
+- (void)setSwitchThumbTintColor:(UIColor *)color {
+    [self.switchControl setThumbTintColor:color];
 }
 
 @end

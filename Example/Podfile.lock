@@ -1,6 +1,8 @@
 PODS:
   - Kiwi (2.3.1)
-  - TFFormDescriptor (0.1.0):
+  - SAMTextView (0.2.2)
+  - TFFormDescriptor (0.0.1):
+    - SAMTextView
     - TFTableDescriptor (~> 1.2.0)
   - TFTableDescriptor (1.2.0)
 
@@ -14,7 +16,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Kiwi: f038a6c61f7a9e4d7766bff5717aa3b3fdb75f55
-  TFFormDescriptor: ef1462276aeb81ea083cbd36fe1e6a3df1d91e5c
+  SAMTextView: 979c43bb1fa5859ddfbfeb35e9c296a2b0ec55fd
+  TFFormDescriptor: 317827c42e33e66afa05618c28be17e3e01ef29c
   TFTableDescriptor: 83aa48081017fad3fc4ba89866a67b2ea7f31813
 
-COCOAPODS: 0.36.4
+COCOAPODS: 0.36.0

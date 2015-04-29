@@ -12,11 +12,17 @@
 #define COCOAPODS_VERSION_MINOR_Kiwi 3
 #define COCOAPODS_VERSION_PATCH_Kiwi 1
 
+// SAMTextView
+#define COCOAPODS_POD_AVAILABLE_SAMTextView
+#define COCOAPODS_VERSION_MAJOR_SAMTextView 0
+#define COCOAPODS_VERSION_MINOR_SAMTextView 2
+#define COCOAPODS_VERSION_PATCH_SAMTextView 2
+
 // TFFormDescriptor
 #define COCOAPODS_POD_AVAILABLE_TFFormDescriptor
 #define COCOAPODS_VERSION_MAJOR_TFFormDescriptor 0
-#define COCOAPODS_VERSION_MINOR_TFFormDescriptor 1
-#define COCOAPODS_VERSION_PATCH_TFFormDescriptor 0
+#define COCOAPODS_VERSION_MINOR_TFFormDescriptor 0
+#define COCOAPODS_VERSION_PATCH_TFFormDescriptor 1
 
 // TFTableDescriptor
 #define COCOAPODS_POD_AVAILABLE_TFTableDescriptor

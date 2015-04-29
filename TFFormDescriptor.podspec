@@ -34,5 +34,6 @@ Pod::Spec.new do |s|
   # s.frameworks = 'UIKit', 'MapKit'
   s.dependency 'TFTableDescriptor', '~> 1.2.0'
   #s.dependency 'TFTableDescriptor'
+  s.dependency 'SAMTextView'
 
 end

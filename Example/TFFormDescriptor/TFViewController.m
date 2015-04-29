@@ -11,6 +11,7 @@
 
 static NSString * const kFieldTagTextField = @"TextFieldTag";
 static NSString * const kFieldTagSwitch = @"SwitchFieldTag";
+static NSString * const kFieldTagTextView = @"TextViewFieldTag";
 
 @interface TFViewController ()<TFFormDescriptorDelegate>
 
@@ -36,6 +37,10 @@ static NSString * const kFieldTagSwitch = @"SwitchFieldTag";
     TFFormFieldDescriptor *switchField = [TFFormFieldDescriptor descriptorWithClass:[TFFormTitledSwitchField class] configuration:[TFFormTitledSwitchField configurationWithTitle:@"Are you sure?" value:YES] tag:kFieldTagSwitch];
     
     [section addRow:switchField];
+
+    TFFormFieldDescriptor *textViewField = [TFFormFieldDescriptor descriptorWithClass:[TFFormTitledTextViewField class] configuration:[TFFormTitledTextViewField configurationWithTitle:@"Name" placeholder:@"Text view" value:@""] tag:kFieldTagTextView];
+    
+    [section addRow:textViewField];
     
     [form addSection:section];
     
@@ -46,7 +51,7 @@ static NSString * const kFieldTagSwitch = @"SwitchFieldTag";
 }
 
 - (IBAction)printValues:(id)sender {
-
+    [self.view endEditing:YES];
     NSLog(@"%@", [self.formDescriptor allValues]);
 
 }
@@ -56,14 +61,24 @@ static NSString * const kFieldTagSwitch = @"SwitchFieldTag";
 - (void)formDescriptor:(TFFormDescriptor *)formDescriptor didTriggerAction:(TFFormAction)formAction field:(TFFormFieldDescriptor *)field tag:(NSString *)tag {
     
     if (formAction == TFFormActionStateValueDidChange) {
-        
         if ([tag isEqualToString:kFieldTagSwitch]) {
             NSLog(@"Value did change: %@", [self.formDescriptor valueAtField:field]);
+        } else if ([tag isEqualToString:kFieldTagTextField]) {
+            NSLog(@"Value is: %@", [self.formDescriptor valueAtField:field]);
+        } else if ([tag isEqualToString:kFieldTagTextView]) {
+            NSLog(@"Value is: %@", [self.formDescriptor valueAtField:field]);
         }
-    } else if (formAction == TFFormActionSwitchTRLALA) {
         
+    } else if (formAction == TFFormActionTextFieldDidBeginEditing) {
+        NSLog(@"Did begin editing");
+    } else if (formAction == TFFormActionTextFieldDidEndEditing) {
+        NSLog(@"Did end editing, value: %@", [self.formDescriptor valueAtField:field]);
+    } else if (formAction == TFFormActionTextViewDidBeginEditing) {
+        NSLog(@"Did begin editing");
+    } else if (formAction == TFFormActionTextViewDidEndEditing) {
+        NSLog(@"Did end editing, value: %@", [self.formDescriptor valueAtField:field]);
     }
-    
+
 }
 
 
