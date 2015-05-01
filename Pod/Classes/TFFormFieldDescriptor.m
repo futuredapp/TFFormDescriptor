@@ -8,6 +8,8 @@
 
 #import "TFFormFieldDescriptor.h"
 
+#import "TFFormSectionDescriptor.h"
+#import "TFFormDescriptor.h"
 
 @implementation TFFormFieldDescriptor
 
@@ -19,6 +21,13 @@
     formRowDescriptor.rowDescriptor = rowDescriptor;
     
     return formRowDescriptor;
+}
+
+- (id)value{
+    return [self.formSectionDescriptor.formDescriptor valueAtField:self];
+}
+- (void)setValue:(id)value{
+    return [self.formSectionDescriptor.formDescriptor setValue:value atField:self];
 }
 
 

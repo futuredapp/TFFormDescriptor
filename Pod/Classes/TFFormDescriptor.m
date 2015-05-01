@@ -55,29 +55,31 @@
 
 #pragma mark - Adding sections and rows
 
+
 - (void)addSection:(TFFormSectionDescriptor *)formSectionDescriptor; {
     [self.tableDescriptor addSection:formSectionDescriptor.sectionDescriptor];
     formSectionDescriptor.formDescriptor = self;
+    [self updateContentVisibility];
 }
 
 #pragma mark - TFTableDescriptor delegate
 
 - (void)tableDescriptor:(TFTableDescriptor *)descriptor didSelectRow:(TFRowDescriptor *)rowDescriptor {
-    
+
 }
 
 
 
-#pragma mark - Getting value
-
+#pragma mark - Field value - getters
 - (id)valueAtFieldWithTag:(NSString *)tag {
     TFRowDescriptor *rowDescriptor = [self.tableDescriptor rowForTag:tag];
     NSAssert(rowDescriptor != nil, ([NSString stringWithFormat:@"Row with tag %@ not found", tag]));
     
-    TFFormBaseField *field = (TFFormBaseField *)[self.tableDescriptor cellForRow:rowDescriptor];
-    NSAssert(field != nil, ([NSString stringWithFormat:@"Form field for tag %@ not found", tag]));
     
-    return [field value];
+//    TFFormBaseField *field = (TFFormBaseField *)[self.tableDescriptor cellForRow:rowDescriptor];
+//    NSAssert(rowDescriptor.formRowDescriptor != nil, ([NSString stringWithFormat:@"Form field for tag %@ not found", tag]));
+    
+    return [self valueAtField:rowDescriptor.formRowDescriptor];
 }
 
 - (id)valueAtField:(TFFormFieldDescriptor *)fieldDescriptor {
@@ -86,7 +88,8 @@
 
 - (id)valueAtRow:(TFRowDescriptor *)rowDescriptor {
     TFFormBaseField *field = (TFFormBaseField *)[self.tableDescriptor cellForRow:rowDescriptor];
-    NSAssert(field != nil, ([NSString stringWithFormat:@"Form field for tag %@ not found", field.rowDescriptor.tag]));
+// check disabled, has connection with this issue https://github.com/thefuntasty/TFFormDescriptor/issues/2
+//    NSAssert(field != nil, ([NSString stringWithFormat:@"Form field for tag %@ not found", field.rowDescriptor.tag]));
     
     return [field value];
 }
@@ -100,6 +103,61 @@
     }
     
     return [mutableDict copy];
+}
+
+#pragma mark Field value - settings
+- (void)setValue:(id)value atFieldWithTag:(NSString *)tag{
+    TFRowDescriptor *rowDescriptor = [self.tableDescriptor rowForTag:tag];
+    NSAssert(rowDescriptor != nil, ([NSString stringWithFormat:@"Row with tag %@ not found", tag]));
+    
+//    TFFormBaseField *field = (TFFormBaseField *)[self.tableDescriptor cellForRow:rowDescriptor];
+    NSAssert(rowDescriptor.formRowDescriptor != nil, ([NSString stringWithFormat:@"Form field for tag %@ not found", tag]));
+    
+    return [self setValue:value atField:rowDescriptor.formRowDescriptor];
+}
+
+- (void)setValue:(id)value atField:(TFFormFieldDescriptor *)fieldDescriptor{
+    [self setValue:value atRow:fieldDescriptor.rowDescriptor];
+}
+- (void)setValue:(id)value atRow:(TFRowDescriptor *)rowDescriptor {
+    TFFormBaseField *field = (TFFormBaseField *)[self.tableDescriptor cellForRow:rowDescriptor];
+    NSAssert(field != nil, ([NSString stringWithFormat:@"Form field for tag %@ not found", field.rowDescriptor.tag]));
+    
+    [field setValue:value];
+}
+
+#pragma mark - Actions
+
+- (void)triggerAction:(TFFormAction)formAction forField:(TFFormBaseField *)field{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(formDescriptor:didTriggerAction:field:tag:)]) {
+        [self.delegate formDescriptor:self didTriggerAction:formAction field:field.rowDescriptor.formRowDescriptor tag:field.rowDescriptor.tag];
+    }
+    if (formAction == TFFormActionStateValueDidChange) {
+        [self updateContentVisibility];
+    }
+}
+
+
+#pragma mark - Visibility
+
+- (void)updateContentVisibility{
+    [self.tableDescriptor beginUpdates];
+    
+    for (TFSectionDescriptor *section in [self.tableDescriptor allSections]) {
+        TFFormSectionDescriptor *formSection = section.formSectionDescriptor;
+        if ([section isKindOfClass:[TFFormSectionDescriptor class]] && formSection.displayBlock) {
+            formSection.sectionDescriptor.hidden = !formSection.displayBlock(self);
+        }else formSection.sectionDescriptor.hidden = NO;
+    }
+
+    for (TFRowDescriptor *row in [self.tableDescriptor allRows]) {
+        TFFormFieldDescriptor *fieldDescriptor = row.formRowDescriptor;
+        if ([fieldDescriptor isKindOfClass:[TFFormFieldDescriptor class]] && fieldDescriptor.displayBlock) {
+            row.hidden = !fieldDescriptor.displayBlock(self);
+        }else row.hidden = NO;
+    }
+    
+    [self.tableDescriptor endUpdates];
 }
 
 @end

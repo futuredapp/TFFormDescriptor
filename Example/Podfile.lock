@@ -1,20 +1,28 @@
 PODS:
   - Kiwi (2.3.1)
-  - TFFormDescriptor (0.1.0):
+  - TFFormDescriptor (0.0.1):
     - TFTableDescriptor (~> 1.2.0)
   - TFTableDescriptor (1.2.0)
 
 DEPENDENCIES:
   - Kiwi
   - TFFormDescriptor (from `../`)
+  - TFTableDescriptor (from `https://github.com/thefuntasty/TFTableDescriptor`)
 
 EXTERNAL SOURCES:
   TFFormDescriptor:
     :path: ../
+  TFTableDescriptor:
+    :git: https://github.com/thefuntasty/TFTableDescriptor
+
+CHECKOUT OPTIONS:
+  TFTableDescriptor:
+    :commit: 2111687cdd6da5b479c5eaab7478437cd4d92515
+    :git: https://github.com/thefuntasty/TFTableDescriptor
 
 SPEC CHECKSUMS:
   Kiwi: f038a6c61f7a9e4d7766bff5717aa3b3fdb75f55
-  TFFormDescriptor: ef1462276aeb81ea083cbd36fe1e6a3df1d91e5c
+  TFFormDescriptor: 9f740a97673e05d52185b6dc7c4a2f7597c08633
   TFTableDescriptor: 83aa48081017fad3fc4ba89866a67b2ea7f31813
 
 COCOAPODS: 0.36.4

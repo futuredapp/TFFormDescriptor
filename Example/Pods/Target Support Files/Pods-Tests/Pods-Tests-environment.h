@@ -15,8 +15,8 @@
 // TFFormDescriptor
 #define COCOAPODS_POD_AVAILABLE_TFFormDescriptor
 #define COCOAPODS_VERSION_MAJOR_TFFormDescriptor 0
-#define COCOAPODS_VERSION_MINOR_TFFormDescriptor 1
-#define COCOAPODS_VERSION_PATCH_TFFormDescriptor 0
+#define COCOAPODS_VERSION_MINOR_TFFormDescriptor 0
+#define COCOAPODS_VERSION_PATCH_TFFormDescriptor 1
 
 // TFTableDescriptor
 #define COCOAPODS_POD_AVAILABLE_TFTableDescriptor

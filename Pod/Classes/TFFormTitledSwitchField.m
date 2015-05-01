@@ -35,6 +35,7 @@
 }
 
 - (id)value {
+    NSLog(@"%@ => %i",self.switchControl,self.switchControl.on);
     return @(self.switchControl.on);
 }
 
@@ -44,7 +45,7 @@
 }
 
 - (IBAction)valueDidChange:(id)sender {
-    [self triggerAction:TFFormActionSwitchTRLALA];
+    [self triggerAction:TFFormActionStateValueDidChange];
 }
 
 #pragma mark - UIAppearance

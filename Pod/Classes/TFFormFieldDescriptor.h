@@ -10,13 +10,15 @@
 #import "TFFormBaseField.h"
 #import "TFRowDescriptor+FormRowReference.h"
 
-@class TFFormSectionDescriptor;
+@class TFFormSectionDescriptor,TFFormDescriptor;
 
 @interface TFFormFieldDescriptor : NSObject
 
 @property (strong, nonatomic) TFRowDescriptor *rowDescriptor;
 @property (weak, nonatomic) TFFormSectionDescriptor *formSectionDescriptor;
 @property (strong, nonatomic) id value;
+
+@property (copy, nonatomic) BOOL (^displayBlock)(TFFormDescriptor *formDescriptor);
 
 + (instancetype)descriptorWithClass:(Class)c configuration:(TFRowConfiguration *)cfg tag:(NSString *)tag;
 

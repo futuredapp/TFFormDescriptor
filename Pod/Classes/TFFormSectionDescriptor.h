@@ -7,6 +7,7 @@
 //
 
 #import "TFSectionDescriptor.h"
+#import "TFSectionDescriptor+FormSectionReference.h"
 
 @class TFFormFieldDescriptor, TFFormDescriptor;
 
@@ -14,6 +15,8 @@
 
 @property (strong, nonatomic) TFSectionDescriptor *sectionDescriptor;
 @property (weak, nonatomic) TFFormDescriptor *formDescriptor;
+
+@property (copy, nonatomic) BOOL (^displayBlock)(TFFormDescriptor *formDescriptor);
 
 + (instancetype)descriptorWithClass:(Class)c tag:(NSInteger)tag data:(id)data;
 + (instancetype)descriptorWithTag:(NSInteger)tag data:(id)data;

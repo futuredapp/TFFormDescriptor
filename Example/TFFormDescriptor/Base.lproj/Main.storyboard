@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ELW-VR-153">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ELW-VR-153">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -47,6 +47,23 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <segue destination="tJ2-ys-mP7" kind="show" id="eZg-pl-Voo"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="ybJ-Y7-foc" style="IBUITableViewCellStyleDefault" id="lNH-MV-AyY">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lNH-MV-AyY" id="ki5-OU-dLZ">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Visibility example" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ybJ-Y7-foc">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="WFc-2x-Ea6" kind="show" id="Na2-q4-2zU"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -103,6 +120,45 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eV9-H7-wjc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="421" y="454"/>
+        </scene>
+        <!--Visibility View Controller-->
+        <scene sceneID="6K8-w1-ShG">
+            <objects>
+                <viewController id="WFc-2x-Ea6" customClass="TFVisibilityViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mjJ-UD-JgW"/>
+                        <viewControllerLayoutGuide type="bottom" id="1LY-tL-WbB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="q6T-wy-nGW">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="w2d-cJ-ia4">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="w2d-cJ-ia4" firstAttribute="top" secondItem="mjJ-UD-JgW" secondAttribute="bottom" constant="-64" id="AzK-O4-ynt"/>
+                            <constraint firstAttribute="bottom" secondItem="w2d-cJ-ia4" secondAttribute="bottom" id="GiG-oZ-pCN"/>
+                            <constraint firstItem="w2d-cJ-ia4" firstAttribute="leading" secondItem="q6T-wy-nGW" secondAttribute="leading" id="dO6-wP-AK5"/>
+                            <constraint firstItem="w2d-cJ-ia4" firstAttribute="top" secondItem="q6T-wy-nGW" secondAttribute="top" id="gio-Hs-faM"/>
+                            <constraint firstAttribute="trailing" secondItem="w2d-cJ-ia4" secondAttribute="trailing" id="n7l-HN-i7B"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="AzK-O4-ynt"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="w2d-cJ-ia4" id="gXe-RP-AXO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="i0f-cj-WEk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="421" y="1148"/>
         </scene>
     </scenes>
 </document>

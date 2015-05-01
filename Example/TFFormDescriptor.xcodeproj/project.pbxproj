@@ -22,6 +22,7 @@
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		73423938DF4341FF23932E52 /* libPods-Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E8B7425B827F7A3BB6B8CC1 /* libPods-Tests.a */; };
 		902197311AECF0FB009B33FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9021972F1AECF0FB009B33FA /* Main.storyboard */; };
+		EE8155101AF3E21E00E92BFB /* TFVisibilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE81550F1AF3E21E00E92BFB /* TFVisibilityViewController.m */; };
 		FB07962962F83280227DDF3B /* libPods-TFFormDescriptor.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4D39E05BDDA374ECA679025 /* libPods-TFFormDescriptor.a */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +66,8 @@
 		B41BFFF210DF92F5FF55372E /* Pods-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		B718CC29AD06E88BF23A9178 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		C24D6F1119C45E4311269863 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		EE81550E1AF3E21E00E92BFB /* TFVisibilityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFVisibilityViewController.h; sourceTree = "<group>"; };
+		EE81550F1AF3E21E00E92BFB /* TFVisibilityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFVisibilityViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +197,7 @@
 		EE79C1671AEE6BAE00110A0C /* Examples */ = {
 			isa = PBXGroup;
 			children = (
+				EE81550D1AF3E1FF00E92BFB /* Visibility */,
 				EE79C1681AEE6BB800110A0C /* Basic */,
 			);
 			name = Examples;
@@ -206,6 +210,15 @@
 				6003F5A6195388D20070C39A /* TFViewController.m */,
 			);
 			name = Basic;
+			sourceTree = "<group>";
+		};
+		EE81550D1AF3E1FF00E92BFB /* Visibility */ = {
+			isa = PBXGroup;
+			children = (
+				EE81550E1AF3E21E00E92BFB /* TFVisibilityViewController.h */,
+				EE81550F1AF3E21E00E92BFB /* TFVisibilityViewController.m */,
+			);
+			name = Visibility;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -373,6 +386,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE8155101AF3E21E00E92BFB /* TFVisibilityViewController.m in Sources */,
 				6003F59E195388D20070C39A /* TFAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* TFViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
