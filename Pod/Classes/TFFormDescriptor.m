@@ -101,7 +101,7 @@
     for (TFRowDescriptor *rowDescriptor in [self.tableDescriptor allRows]) {
         id value = [self valueAtRow:rowDescriptor];
         if (value){
-            [mutableDict setObject: forKey:rowDescriptor.tag];
+            [mutableDict setObject:value forKey:rowDescriptor.tag];
         }
     }
     
