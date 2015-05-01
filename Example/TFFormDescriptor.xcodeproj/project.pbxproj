@@ -23,6 +23,7 @@
 		73423938DF4341FF23932E52 /* libPods-Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E8B7425B827F7A3BB6B8CC1 /* libPods-Tests.a */; };
 		902197311AECF0FB009B33FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9021972F1AECF0FB009B33FA /* Main.storyboard */; };
 		EE8155101AF3E21E00E92BFB /* TFVisibilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE81550F1AF3E21E00E92BFB /* TFVisibilityViewController.m */; };
+		EED0D1FE1AF40A2A0070DB2A /* TFDataObservingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EED0D1FD1AF40A2A0070DB2A /* TFDataObservingViewController.m */; };
 		FB07962962F83280227DDF3B /* libPods-TFFormDescriptor.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4D39E05BDDA374ECA679025 /* libPods-TFFormDescriptor.a */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +69,8 @@
 		C24D6F1119C45E4311269863 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		EE81550E1AF3E21E00E92BFB /* TFVisibilityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFVisibilityViewController.h; sourceTree = "<group>"; };
 		EE81550F1AF3E21E00E92BFB /* TFVisibilityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFVisibilityViewController.m; sourceTree = "<group>"; };
+		EED0D1FC1AF40A2A0070DB2A /* TFDataObservingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFDataObservingViewController.h; sourceTree = "<group>"; };
+		EED0D1FD1AF40A2A0070DB2A /* TFDataObservingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFDataObservingViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +200,7 @@
 		EE79C1671AEE6BAE00110A0C /* Examples */ = {
 			isa = PBXGroup;
 			children = (
+				EED0D1FB1AF40A0E0070DB2A /* DataObserving */,
 				EE81550D1AF3E1FF00E92BFB /* Visibility */,
 				EE79C1681AEE6BB800110A0C /* Basic */,
 			);
@@ -219,6 +223,15 @@
 				EE81550F1AF3E21E00E92BFB /* TFVisibilityViewController.m */,
 			);
 			name = Visibility;
+			sourceTree = "<group>";
+		};
+		EED0D1FB1AF40A0E0070DB2A /* DataObserving */ = {
+			isa = PBXGroup;
+			children = (
+				EED0D1FC1AF40A2A0070DB2A /* TFDataObservingViewController.h */,
+				EED0D1FD1AF40A2A0070DB2A /* TFDataObservingViewController.m */,
+			);
+			name = DataObserving;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -388,6 +401,7 @@
 			files = (
 				EE8155101AF3E21E00E92BFB /* TFVisibilityViewController.m in Sources */,
 				6003F59E195388D20070C39A /* TFAppDelegate.m in Sources */,
+				EED0D1FE1AF40A2A0070DB2A /* TFDataObservingViewController.m in Sources */,
 				6003F5A7195388D20070C39A /* TFViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 			);

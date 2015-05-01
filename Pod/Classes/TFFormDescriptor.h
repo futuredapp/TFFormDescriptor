@@ -49,4 +49,8 @@
 
 - (void)triggerAction:(TFFormAction)formAction forField:(TFFormBaseField *)field;
 
+#pragma mark - Visibility
+
+- (void)updateContentVisibility;
+
 @end

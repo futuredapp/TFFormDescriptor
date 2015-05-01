@@ -12,6 +12,7 @@
 
 @interface TFDataObservingFormDescriptor ()
 @property (copy, nonatomic) NSString *currentlyChangingKey;
+@property (strong, nonatomic) NSMutableArray *observedKeyPaths;
 @end
 
 @implementation TFDataObservingFormDescriptor
@@ -19,7 +20,7 @@
 -(void)setData:(id)data{
     // make sure that old object is free of observing
     if (self.data) {
-        [self.data removeObserver:self];
+        [self unregisterObserver];
     }
     
     _data = data;
@@ -27,12 +28,23 @@
     [self updateObserver];
 }
 
-
+- (void)unregisterObserver{
+    for (NSString *keyPath in self.observedKeyPaths) {
+        [self.data removeObserver:self forKeyPath:keyPath context:(__bridge void *)(self)];
+    }
+    self.observedKeyPaths = nil;
+}
 - (void)updateObserver{
-    [self.data removeObserver:self];
-    NSDictionary *values = [self allValues];
-    for (NSString *key in values) {
-        [self.data addObserver:self forKeyPath:key options:0 context:nil];
+    [self unregisterObserver];
+    if (self.data) {
+        NSDictionary *values = [self allValues];
+        self.observedKeyPaths = [NSMutableArray array];
+        for (NSString *key in values) {
+            [self.data addObserver:self forKeyPath:key options:0 context:(__bridge void *)(self)];
+            [self.observedKeyPaths addObject:key];
+        }
+    }else{
+        self.observedKeyPaths = nil;
     }
 }
 
@@ -49,6 +61,7 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     if (object == self.data && ![keyPath isEqualToString:self.currentlyChangingKey]) {
         [self setValue:[object valueForKeyPath:keyPath] atFieldWithTag:keyPath];
+        [self updateContentVisibility];
     }
 }
 
@@ -64,7 +77,6 @@
 }
 - (void)setValue:(id)value atField:(TFFormFieldDescriptor *)fieldDescriptor{
     [super setValue:value atField:fieldDescriptor];
-    [self setValue:value forKeyPath:fieldDescriptor.rowDescriptor.tag];
 }
 
 - (void)setDataValue:(id)value forKeyPath:(NSString *)keyPath{

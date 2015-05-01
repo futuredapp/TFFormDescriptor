@@ -24,7 +24,7 @@
 
 + (instancetype)descriptorWithTable:(UITableView *)tableView {
     
-    TFFormDescriptor *formDescriptor = [[TFFormDescriptor alloc] init];
+    TFFormDescriptor *formDescriptor = [[[self class] alloc] init];
     
     formDescriptor.tableDescriptor = [TFTableDescriptor descriptorWithTable:tableView];
     formDescriptor.tableDescriptor.delegate = formDescriptor;

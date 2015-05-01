@@ -66,6 +66,23 @@
                                             <segue destination="WFc-2x-Ea6" kind="show" id="Na2-q4-2zU"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="AFH-LW-r1e" style="IBUITableViewCellStyleDefault" id="T44-mn-wrR">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="T44-mn-wrR" id="xRj-tx-BhR">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Data observing example" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AFH-LW-r1e">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="Reg-CZ-659" kind="show" id="A8a-dz-i2W"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -79,6 +96,46 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Lt-6J-jfW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-320" y="454"/>
+        </scene>
+        <!--Data observing example-->
+        <scene sceneID="VsH-Bj-1zd">
+            <objects>
+                <viewController id="Reg-CZ-659" customClass="TFDataObservingViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="BON-UT-qqh"/>
+                        <viewControllerLayoutGuide type="bottom" id="jPG-Dr-XEi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="msx-MY-BoB">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="lMw-h1-35f">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="lMw-h1-35f" firstAttribute="top" secondItem="msx-MY-BoB" secondAttribute="top" id="9bm-hR-tMa"/>
+                            <constraint firstItem="jPG-Dr-XEi" firstAttribute="top" secondItem="lMw-h1-35f" secondAttribute="bottom" id="AMV-fG-B83"/>
+                            <constraint firstAttribute="trailing" secondItem="lMw-h1-35f" secondAttribute="trailing" id="GB0-jV-N4g"/>
+                            <constraint firstItem="lMw-h1-35f" firstAttribute="leading" secondItem="msx-MY-BoB" secondAttribute="leading" id="jtx-8H-dGt"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Data observing example" id="BPd-tn-EWy">
+                        <barButtonItem key="rightBarButtonItem" title="Reset data" id="vW0-Dc-Rdy">
+                            <connections>
+                                <action selector="resetData:" destination="Reg-CZ-659" id="8Jm-V9-kzi"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="lMw-h1-35f" id="FE7-MP-Z4b"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zwt-0h-fc3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="421" y="-268"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Rzs-vP-xzH">

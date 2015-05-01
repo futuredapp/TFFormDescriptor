@@ -1,27 +1,29 @@
 //
-//  TFVisibilityViewController.m
+//  TFDataObservingViewController.m
 //  TFFormDescriptor
 //
 //  Created by Jakub Knejzlik on 01/05/15.
 //  Copyright (c) 2015 Ales Kocur. All rights reserved.
 //
 
-#import "TFVisibilityViewController.h"
-#import <TFFormDescriptor.h>
+#import "TFDataObservingViewController.h"
 
-@interface TFVisibilityViewController ()
+#import "TFDataObservingFormDescriptor.h"
 
-@property TFFormDescriptor *formDescriptor;
+@interface TFDataObservingViewController ()
+@property TFDataObservingFormDescriptor *formDescriptor;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-
+@property (strong, nonatomic) NSMutableDictionary *data;
 @end
 
-@implementation TFVisibilityViewController
+@implementation TFDataObservingViewController
 
-- (void)viewDidLoad {
+-(void)viewDidLoad{
     [super viewDidLoad];
     
-    TFFormDescriptor *form = [TFFormDescriptor descriptorWithTable:self.tableView];
+    self.data = [@{@"name":@"name",@"hasCar":@NO} mutableCopy];
+    
+    TFDataObservingFormDescriptor *form = [TFDataObservingFormDescriptor descriptorWithTable:self.tableView];
     
     TFFormSectionDescriptor *section = [TFFormSectionDescriptor descriptorWithTag:0 data:nil];
     
@@ -35,7 +37,7 @@
     
     
     textField = [TFFormFieldDescriptor descriptorWithClass:[TFFormTitledTextField class] configuration:[TFFormTitledTextField configurationWithTitle:@"Car brand" placeholder:@"fiat, seat, audi, kia, hyundai" value:nil] tag:@"carBrand"];
-
+    
     [textField setDisplayBlock:^BOOL(TFFormDescriptor *formDescriptor) {
         NSLog(@"%i",[[hasCarField value] boolValue]);
         return [[hasCarField value] boolValue];
@@ -47,7 +49,16 @@
     [form addSection:section];
     
     self.formDescriptor = form;
-    
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self.formDescriptor setData:self.data];
+}
+
+- (IBAction)resetData:(id)sender {
+    self.data[@"name"] = @"name";
+    self.data[@"hasCar"] = @NO;
 }
 
 @end
