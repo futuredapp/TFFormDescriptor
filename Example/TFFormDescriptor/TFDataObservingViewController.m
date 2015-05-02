@@ -31,7 +31,7 @@
     
     [section addRow:textField];
     
-    TFFormFieldDescriptor *hasCarField = [TFFormFieldDescriptor descriptorWithClass:[TFFormTitledSwitchField class] configuration:[TFFormTitledSwitchField configurationWithTitle:@"Do You have car?" value:YES] tag:@"hasCar"];
+    TFFormFieldDescriptor *hasCarField = [TFFormFieldDescriptor descriptorWithClass:[TFFormTitledSwitchField class] configuration:[TFFormTitledSwitchField configurationWithTitle:@"Do You have car?" value:NO] tag:@"hasCar"];
     
     [section addRow:hasCarField];
     

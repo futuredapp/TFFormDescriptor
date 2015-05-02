@@ -10,6 +10,8 @@
 
 #import "TFRowDescriptor+FormRowReference.h"
 
+static void *TFDataObservingFormDescriptorKeyPathContext = &TFDataObservingFormDescriptorKeyPathContext;
+
 @interface TFDataObservingFormDescriptor ()
 @property (copy, nonatomic) NSString *currentlyChangingKey;
 @property (strong, nonatomic) NSMutableArray *observedKeyPaths;
@@ -30,7 +32,7 @@
 
 - (void)unregisterObserver{
     for (NSString *keyPath in self.observedKeyPaths) {
-        [self.data removeObserver:self forKeyPath:keyPath context:(__bridge void *)(self)];
+        [self.data removeObserver:self forKeyPath:keyPath context:TFDataObservingFormDescriptorKeyPathContext];
     }
     self.observedKeyPaths = nil;
 }
@@ -40,7 +42,7 @@
         NSDictionary *values = [self allValues];
         self.observedKeyPaths = [NSMutableArray array];
         for (NSString *key in values) {
-            [self.data addObserver:self forKeyPath:key options:0 context:(__bridge void *)(self)];
+            [self.data addObserver:self forKeyPath:key options:0 context:TFDataObservingFormDescriptorKeyPathContext];
             [self.observedKeyPaths addObject:key];
         }
     }else{
