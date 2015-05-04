@@ -35,6 +35,7 @@
 }
 
 - (id)value {
+    NSLog(@"%@ => %i",self.switchControl,self.switchControl.on);
     return @(self.switchControl.on);
 }
 

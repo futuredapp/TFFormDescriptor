@@ -35,6 +35,14 @@ static NSString * const kFieldTagTextView = @"TextViewFieldTag";
     
     [section addRow:textField];
     
+    
+    for (int x = 0; x<20; x++) {
+        textField = [TFFormFieldDescriptor descriptorWithClass:[TFFormTitledTextField class] configuration:[TFFormTitledTextField configurationWithTitle:@"Name" placeholder:@"Your name" value:@"Alonso"] tag:[NSString stringWithFormat:@"aaa%i",x]];
+        
+        [section addRow:textField];
+    }
+    
+    
     TFFormFieldDescriptor *switchField = [TFFormFieldDescriptor descriptorWithClass:[TFFormTitledSwitchField class] configuration:[TFFormTitledSwitchField configurationWithTitle:@"Are you sure?" value:YES] tag:kFieldTagSwitch];
     
     [section addRow:switchField];

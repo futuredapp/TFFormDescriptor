@@ -33,9 +33,7 @@
 
 - (void)triggerAction:(TFFormAction)formAction {
     
-    if (self.rowDescriptor.section.tableDescriptor.formDescriptor.delegate && [self.rowDescriptor.section.tableDescriptor.formDescriptor.delegate respondsToSelector:@selector(formDescriptor:didTriggerAction:field:tag:)]) {
-        [self.rowDescriptor.section.tableDescriptor.formDescriptor.delegate formDescriptor:self.rowDescriptor.section.tableDescriptor.formDescriptor didTriggerAction:formAction field:self.rowDescriptor.formRowDescriptor tag:self.rowDescriptor.tag];
-    }
+    [self.rowDescriptor.section.tableDescriptor.formDescriptor triggerAction:formAction forField:self];
     
 }
 

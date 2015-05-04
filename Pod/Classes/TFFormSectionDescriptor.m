@@ -17,7 +17,7 @@ static TFSectionDescriptor * defaultDescriptor = nil;
     
     TFFormSectionDescriptor *formSectionDescriptor = [TFFormSectionDescriptor descriptorWithTag:tag data:data];
     
-    formSectionDescriptor.sectionDescriptor.sectionClass = c;
+    formSectionDescriptor.sectionDescriptor.sectionHeaderClass = c;
     
     return formSectionDescriptor;
     
@@ -26,9 +26,10 @@ static TFSectionDescriptor * defaultDescriptor = nil;
 + (instancetype)descriptorWithTag:(NSInteger)tag data:(id)data {
     TFFormSectionDescriptor *formSectionDescriptor = [[TFFormSectionDescriptor alloc] init];
     formSectionDescriptor.sectionDescriptor = [TFSectionDescriptor descriptorWithTag:tag data:data];
+    formSectionDescriptor.sectionDescriptor.formSectionDescriptor = formSectionDescriptor;
     
-    if (defaultDescriptor && defaultDescriptor.sectionClass) {
-        formSectionDescriptor.sectionDescriptor.sectionClass = defaultDescriptor.sectionClass;
+    if (defaultDescriptor && defaultDescriptor.sectionHeaderClass) {
+        formSectionDescriptor.sectionDescriptor.sectionHeaderClass = defaultDescriptor.sectionHeaderClass;
     }
     
     return formSectionDescriptor;
@@ -39,7 +40,7 @@ static TFSectionDescriptor * defaultDescriptor = nil;
         defaultDescriptor = [TFSectionDescriptor descriptorWithData:nil];
     }
     
-    defaultDescriptor.sectionClass = c;
+    defaultDescriptor.sectionHeaderClass = c;
 }
 
 - (void)addRow:(TFFormFieldDescriptor *)formRowDescriptor {

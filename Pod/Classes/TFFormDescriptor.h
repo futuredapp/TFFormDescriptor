@@ -35,12 +35,23 @@
 
 - (void)addSection:(TFFormSectionDescriptor *)formSectionDescriptor;
 
-#pragma mark - Getting values
+#pragma mark - Field values
 
 - (id)valueAtFieldWithTag:(NSString *)tag;
 - (id)valueAtField:(TFFormFieldDescriptor *)fieldDescriptor;
 
+- (void)setValue:(id)value atFieldWithTag:(NSString *)tag;
+- (void)setValue:(id)value atField:(TFFormFieldDescriptor *)fieldDescriptor;
+
 /// Values in dictionary where key is row tag
 - (NSDictionary *)allValues;
+
+#pragma mark - Actions
+
+- (void)triggerAction:(TFFormAction)formAction forField:(TFFormBaseField *)field;
+
+#pragma mark - Visibility
+
+- (void)updateContentVisibility;
 
 @end

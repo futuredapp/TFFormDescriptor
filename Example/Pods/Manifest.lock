@@ -9,10 +9,18 @@ PODS:
 DEPENDENCIES:
   - Kiwi
   - TFFormDescriptor (from `../`)
+  - TFTableDescriptor (from `https://github.com/thefuntasty/TFTableDescriptor`)
 
 EXTERNAL SOURCES:
   TFFormDescriptor:
     :path: ../
+  TFTableDescriptor:
+    :git: https://github.com/thefuntasty/TFTableDescriptor
+
+CHECKOUT OPTIONS:
+  TFTableDescriptor:
+    :commit: 5349f1ecdb8f3b96e151e727d40136f775c493ae
+    :git: https://github.com/thefuntasty/TFTableDescriptor
 
 SPEC CHECKSUMS:
   EAMTextView: ff8da8bb4f894c8403e45f1ded47058c80775ae3

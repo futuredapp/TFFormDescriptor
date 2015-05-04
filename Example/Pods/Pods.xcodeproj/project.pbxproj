@@ -1199,8 +1199,7 @@
 				53EC8C041B131BECDC8F2669 /* Pods-Tests-TFTableDescriptor-dummy.m */,
 				E825FB6EAC6481E179C7D670 /* Pods-Tests-TFTableDescriptor-prefix.pch */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/Pods-TFFormDescriptor-TFTableDescriptor";
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		F1561BF0FA8192FAB6261383 /* Resources */ = {
@@ -1524,6 +1523,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				3E5885255DB5B1C778FEEC09 /* PBXTargetDependency */,
+				91246AC36FF592DAD3AF1B85 /* PBXTargetDependency */,
 			);
 			name = "Pods-Tests-EAMTextView";
 			productName = "Pods-Tests-EAMTextView";
@@ -1871,6 +1872,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A88F186D4C5CFFBCBE83E672 /* Pods-TFFormDescriptor-TFFormDescriptor-dummy.m in Sources */,
+				D2859023A72613B2AA5DC5D4 /* TFDataObservingFormDescriptor.m in Sources */,
+				CCB9AC81F7B73AB78CA6540A /* TFFormBaseField.m in Sources */,
+				A1545011D78F30BE5510B8CB /* TFFormDescriptor.m in Sources */,
+				8FD31E2FCE9BE2F6AEC12036 /* TFFormFieldDescriptor.m in Sources */,
+				329FCCC2C012BD1A688884EE /* TFFormGlobalAppearance.m in Sources */,
+				BEC5DCE1E1553649449FBE42 /* TFFormSectionDescriptor.m in Sources */,
+				A892F303E1D255B93A082F25 /* TFFormTitledBaseField.m in Sources */,
+				83C0CE065C44E4D567A8F5E5 /* TFFormTitledSwitchField.m in Sources */,
+				740B62FF69ADF45DDE9A79E1 /* TFFormTitledTextField.m in Sources */,
+				652C9869BE7CAE54D2156383 /* TFRowConfiguration.m in Sources */,
+				CAC3FD916C385399C1CD0CC3 /* TFRowDescriptor+FormRowReference.m in Sources */,
+				15FA42372D58348075AF3979 /* TFSectionDescriptor+FormSectionReference.m in Sources */,
+				4CC89F9BFAE6BCFA3A223D8A /* TFTableDescriptor+FormReference.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2034,8 +2049,9 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
 			};
-			name = Debug;
+			name = Release;
 		};
 		355C3CFABD2CAED1D494CE4D /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -2044,7 +2060,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/Pods-Tests-EAMTextView/Pods-Tests-EAMTextView-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				MTL_ENABLE_DEBUG_INFO = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2074,7 +2090,7 @@
 			baseConfigurationReference = 06D66ED21FB2C821D4C2E667 /* Pods-TFFormDescriptor-TFFormDescriptor-Private.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-TFFormDescriptor-TFFormDescriptor/Pods-TFFormDescriptor-TFFormDescriptor-prefix.pch";
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Tests-TFFormDescriptor/Pods-Tests-TFFormDescriptor-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
@@ -2181,7 +2197,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
-			name = Release;
+			name = Debug;
 		};
 		7FE23C2BE5340E36462FC1A9 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -2206,14 +2222,15 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/Pods-TFFormDescriptor-EAMTextView/Pods-TFFormDescriptor-EAMTextView-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
-			name = Release;
+			name = Debug;
 		};
 		9563220412008231D71B39B3 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -2263,7 +2280,7 @@
 			baseConfigurationReference = 9E2E7A42D1F5FA801063A040 /* Pods-TFFormDescriptor-TFTableDescriptor-Private.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-TFFormDescriptor-TFTableDescriptor/Pods-TFFormDescriptor-TFTableDescriptor-prefix.pch";
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Tests-TFTableDescriptor/Pods-Tests-TFTableDescriptor-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
