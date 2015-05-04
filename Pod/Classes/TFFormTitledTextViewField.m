@@ -24,12 +24,20 @@
     
     return [TFRowConfiguration configurationWithBlock:^(TFFormTitledTextViewField *configuration) {
         configuration.titleLabel.text = title;
+        if([configuration.titleLabel.text length] == 0) {
+            configuration.titleMargin.constant = 0;
+        }
         if(placeholder) {
             configuration.textView.placeholder = placeholder;
         }
         if(value){
             configuration.textView.text = value;
         }
+       
+        /*
+        configuration.textViewHeightConstraint.constant = configuration.textView.contentSize.height;
+        [configuration setNeedsUpdateConstraints];
+        */
     }];
     
 }
@@ -45,6 +53,10 @@
     return self.textView.text;
 }
 
++ (NSNumber *)height {
+    
+    return @90;
+}
 
 #pragma mark - UITextViewDelegate
 
@@ -57,8 +69,16 @@
 }
 
 - (void)textViewDidChange:(UITextView *)textView{
+    /*
+    if(self.textViewHeightConstraint.constant < self.textView.contentSize.height) {
+        self.textViewHeightConstraint.constant = self.textView.contentSize.height;
+        [self setNeedsUpdateConstraints];
+        
+    }
+    */
     [self triggerAction:TFFormActionStateValueDidChange];
 }
+
 
 #pragma mark - UIAppearance
 
@@ -74,10 +94,16 @@
     self.textView.textAlignment = textAlignment;
 }
 
-- (void)setTextViewPlaceholderAttributes:(NSDictionary *)placeholderAttributes {
-    if(self.textView.placeholder) {
-        self.textView.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.textView.placeholder attributes:placeholderAttributes];
-    }
+- (void)setTextViewBackgroundColor:(UIColor *)backgroundColor {
+    self.textView.backgroundColor = backgroundColor;
+}
+
+- (void)setTextViewPlaceholderColor:(UIColor *)placeholderColor{
+    self.textView.placeholderColor = placeholderColor;
+}
+
+- (void)setTextViewTintColor:(UIColor *)tintColor{
+    self.textView.tintColor = tintColor;
 }
 
 

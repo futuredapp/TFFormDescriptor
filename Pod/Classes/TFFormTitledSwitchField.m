@@ -40,7 +40,7 @@
 
 + (NSNumber *)height {
     
-    return @40;
+    return @44;
 }
 
 - (IBAction)valueDidChange:(id)sender {

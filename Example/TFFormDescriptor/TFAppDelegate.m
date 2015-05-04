@@ -21,21 +21,29 @@
 
     
     [[TFFormTitledBaseField appearance] setTitleLabelFont:[UIFont systemFontOfSize:15.0]];
-    [[TFFormTitledTextField appearance] setBackgroundColor:[UIColor blueColor]];
+    [[TFFormTitledTextField appearance] setBackgroundColor:[UIColor lightGrayColor]];
+    
     [[TFFormGlobalAppearance appearance] setDefaultFont:[UIFont fontWithName:@"HelveticaNeue-Thin" size:11.0]];
+    
     [[TFFormTitledSwitchField appearance] setSwitchOnTintColor:[UIColor redColor]];
     [[TFFormTitledSwitchField appearance] setSwitchTintColor:[UIColor greenColor]];
     [[TFFormTitledSwitchField appearance] setTitleLabelFont:[UIFont fontWithName:@"HelveticaNeue-Medium" size:10.0]];
-    [[TFFormTitledSwitchField appearance] setContentPadding:UIEdgeInsetsMake(6, 50, 6, 15)];
+    [[TFFormTitledSwitchField appearance] setContentPadding:UIEdgeInsetsMake(6, 10, 6, 10)];
     [[TFFormTitledSwitchField appearance] setSwitchThumbTintColor:[UIColor blackColor]];
     
-    [[TFFormTitledTextField appearance] setContentPadding:UIEdgeInsetsMake(10, 15, 10, 15)];
+    [[TFFormTitledTextField appearance] setContentPadding:UIEdgeInsetsMake(10, 10, 10, 10)];
     [[TFFormTitledTextField appearance] setTextFieldTextColor:[UIColor whiteColor]];
     [[TFFormTitledTextField appearance] setTextFieldBorderStyle:UITextBorderStyleNone];
     [[TFFormTitledTextField appearance] setTextFieldTextAlignment:NSTextAlignmentRight];
     [[TFFormTitledTextField appearance] setTextFieldPlaceholderAttributes:@{ NSForegroundColorAttributeName : [UIColor redColor] }];
+    [[TFFormTitledTextField appearance] setTitleLabelMargin:10];
     
-    [[TFFormTitledTextViewField appearance] setBackgroundColor:[UIColor purpleColor]];
+    [[TFFormTitledTextViewField appearance] setBackgroundColor:[UIColor lightGrayColor]];
+    [[TFFormTitledTextViewField appearance] setTextViewTextAlignment:NSTextAlignmentCenter];
+    [[TFFormTitledTextViewField appearance] setTextViewFont:[UIFont fontWithName:@"HelveticaNeue-Medium" size:12.0]];
+    [[TFFormTitledTextViewField appearance] setTextViewBackgroundColor:[UIColor whiteColor]];
+    [[TFFormTitledTextViewField appearance] setTextViewPlaceholderColor:[UIColor lightGrayColor]];
+    [[TFFormTitledTextViewField appearance] setTextViewTintColor:[UIColor redColor]];
     
     return YES;
 }

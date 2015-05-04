@@ -41,6 +41,7 @@
                 <outlet property="rightPadding" destination="MJK-4e-6Z1" id="r8B-ov-Oh7"/>
                 <outlet property="switchControl" destination="BpL-fk-3Uc" id="KS1-nd-k4w"/>
                 <outlet property="titleLabel" destination="Ze3-Qt-sc5" id="uCZ-WR-mxW"/>
+                <outlet property="titleMargin" destination="2NL-98-Xzp" id="Hes-VG-nc5"/>
                 <outlet property="topPadding" destination="d3Z-9o-Lz9" id="z3x-zd-NN0"/>
             </connections>
             <point key="canvasLocation" x="155" y="313"/>

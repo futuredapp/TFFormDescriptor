@@ -13,16 +13,22 @@
 
 #pragma mark - UIAppearance
 
-- (void)setTitleLabelFont:(UIFont *)font UI_APPEARANCE_SELECTOR {
+- (void)setTitleLabelFont:(UIFont *)font {
     self.titleLabel.font = font;
 }
 
-- (void)setTitleLabelTextColor:(UIColor *)color UI_APPEARANCE_SELECTOR{
+- (void)setTitleLabelTextColor:(UIColor *)color {
     self.titleLabel.textColor = color;
 }
 
-- (void)setTitleLabelTextAlignment:(NSTextAlignment)textAlignment UI_APPEARANCE_SELECTOR{
+- (void)setTitleLabelTextAlignment:(NSTextAlignment)textAlignment {
     self.titleLabel.textAlignment = textAlignment;
+}
+
+- (void)setTitleLabelMargin:(CGFloat)margin {
+    if([self.titleLabel.text length] > 0) {
+        self.titleMargin.constant = margin;
+    }
 }
 
 - (void)configureAppearance:(TFFormGlobalAppearance *)appearance {

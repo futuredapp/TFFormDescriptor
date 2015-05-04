@@ -30,6 +30,7 @@ static NSString * const kFieldTagTextView = @"TextViewFieldTag";
     
     TFFormSectionDescriptor *section = [TFFormSectionDescriptor descriptorWithTag:0 data:nil];
     
+    
     TFFormFieldDescriptor *textField = [TFFormFieldDescriptor descriptorWithClass:[TFFormTitledTextField class] configuration:[TFFormTitledTextField configurationWithTitle:@"Name" placeholder:@"Your name" value:@"Alonso"] tag:kFieldTagTextField];
     
     [section addRow:textField];
@@ -38,7 +39,7 @@ static NSString * const kFieldTagTextView = @"TextViewFieldTag";
     
     [section addRow:switchField];
 
-    TFFormFieldDescriptor *textViewField = [TFFormFieldDescriptor descriptorWithClass:[TFFormTitledTextViewField class] configuration:[TFFormTitledTextViewField configurationWithTitle:@"Name" placeholder:@"Text view" value:@""] tag:kFieldTagTextView];
+    TFFormFieldDescriptor *textViewField = [TFFormFieldDescriptor descriptorWithClass:[TFFormTitledTextViewField class] configuration:[TFFormTitledTextViewField configurationWithTitle:@"Title" placeholder:@"Text view" value:@""] tag:kFieldTagTextView];
     
     [section addRow:textViewField];
     
@@ -51,7 +52,7 @@ static NSString * const kFieldTagTextView = @"TextViewFieldTag";
 }
 
 - (IBAction)printValues:(id)sender {
-    [self.view endEditing:YES];
+    //[self.view endEditing:YES];
     NSLog(@"%@", [self.formDescriptor allValues]);
 
 }
@@ -66,7 +67,7 @@ static NSString * const kFieldTagTextView = @"TextViewFieldTag";
         } else if ([tag isEqualToString:kFieldTagTextField]) {
             NSLog(@"Value is: %@", [self.formDescriptor valueAtField:field]);
         } else if ([tag isEqualToString:kFieldTagTextView]) {
-            NSLog(@"Value is: %@", [self.formDescriptor valueAtField:field]);
+        //    NSLog(@"Value is: %@", [self.formDescriptor valueAtField:field]);
         }
         
     } else if (formAction == TFFormActionTextFieldDidBeginEditing) {

@@ -22,7 +22,7 @@
     "TFTableDescriptor": [
       "~> 1.2.0"
     ],
-    "SAMTextView": [
+    "EAMTextView": [
 
     ]
   }

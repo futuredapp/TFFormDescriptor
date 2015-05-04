@@ -44,6 +44,7 @@
                 <outlet property="rightPadding" destination="dW3-UO-vjc" id="R9g-Dq-grv"/>
                 <outlet property="textField" destination="FJU-Wg-sgC" id="9fg-fJ-Hg7"/>
                 <outlet property="titleLabel" destination="7Lf-UV-Sos" id="RCs-PY-jeX"/>
+                <outlet property="titleMargin" destination="L3L-Gs-mv7" id="cpT-Vg-ByL"/>
                 <outlet property="topPadding" destination="UI1-wT-BVq" id="pYu-l7-kCG"/>
             </connections>
             <point key="canvasLocation" x="322" y="285"/>

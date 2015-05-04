@@ -32,6 +32,10 @@
     
     return [TFRowConfiguration configurationWithBlock:^(TFFormTitledTextField *configuration) {
         configuration.titleLabel.text = title;
+        if([configuration.titleLabel.text length] == 0) {
+            configuration.titleMargin.constant = 0;
+        }
+        
         if(placeholder) {
             configuration.textField.placeholder = placeholder;
         }
