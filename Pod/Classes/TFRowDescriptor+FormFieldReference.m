@@ -6,19 +6,19 @@
 //
 //
 
-#import "TFRowDescriptor+FormRowReference.h"
+#import "TFRowDescriptor+FormFieldReference.h"
 #import "TFFormFieldDescriptor.h"
 #import <objc/runtime.h>
 
-@implementation TFRowDescriptor (FormRowReference)
-@dynamic formRowDescriptor;
+@implementation TFRowDescriptor (FormFieldReference)
+@dynamic formFieldDescriptor;
 
-- (TFFormFieldDescriptor *)formRowDescriptor {
+- (TFFormFieldDescriptor *)formFieldDescriptor {
     
     return objc_getAssociatedObject(self, @selector(formRowDescriptor));
 }
 
-- (void)setFormRowDescriptor:(TFFormFieldDescriptor *)formRowDescriptor {
+- (void)setFormFieldDescriptor:(TFFormFieldDescriptor *)formRowDescriptor {
     objc_setAssociatedObject(self, @selector(formRowDescriptor), formRowDescriptor, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 

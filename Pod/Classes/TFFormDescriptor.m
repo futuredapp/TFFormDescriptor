@@ -75,7 +75,7 @@
     TFRowDescriptor *rowDescriptor = [self.tableDescriptor rowForTag:tag];
     NSAssert(rowDescriptor != nil, ([NSString stringWithFormat:@"Row with tag %@ not found", tag]));
     
-    return [self valueAtField:rowDescriptor.formRowDescriptor];
+    return [self valueAtField:rowDescriptor.formFieldDescriptor];
 }
 
 - (id)valueAtField:(TFFormFieldDescriptor *)fieldDescriptor {
@@ -87,7 +87,7 @@
     NSMutableDictionary *mutableDict = [@{} mutableCopy];
     
     for (TFRowDescriptor *rowDescriptor in [self.tableDescriptor allRows]) {
-        id value = [self valueAtField:rowDescriptor.formRowDescriptor];
+        id value = [self valueAtField:rowDescriptor.formFieldDescriptor];
         if (value){
             [mutableDict setObject:value forKey:rowDescriptor.tag];
         }
@@ -109,9 +109,9 @@
     NSAssert(rowDescriptor != nil, ([NSString stringWithFormat:@"Row with tag %@ not found", tag]));
     
 //    TFFormBaseField *field = (TFFormBaseField *)[self.tableDescriptor cellForRow:rowDescriptor];
-    NSAssert(rowDescriptor.formRowDescriptor != nil, ([NSString stringWithFormat:@"Form field for tag %@ not found", tag]));
+    NSAssert(rowDescriptor.formFieldDescriptor != nil, ([NSString stringWithFormat:@"Form field for tag %@ not found", tag]));
     
-    return [self setValue:value atField:rowDescriptor.formRowDescriptor];
+    return [self setValue:value atField:rowDescriptor.formFieldDescriptor];
 }
 
 - (void)setValue:(id)value atField:(TFFormFieldDescriptor *)fieldDescriptor{
@@ -121,15 +121,15 @@
 //    TFFormBaseField *field = (TFFormBaseField *)[self.tableDescriptor cellForRow:rowDescriptor];
 //    NSAssert(field != nil, ([NSString stringWithFormat:@"Form field for tag %@ not found", field.rowDescriptor.tag]));
     
-    [rowDescriptor.formRowDescriptor setValue:value];
-    [self updateValueDataAtField:rowDescriptor.formRowDescriptor];
+    [rowDescriptor.formFieldDescriptor setValue:value];
+    [self updateValueDataAtField:rowDescriptor.formFieldDescriptor];
 }
 
 #pragma mark - Actions
 
 - (void)triggerAction:(TFFormAction)formAction forField:(TFFormBaseField *)field{
     if (self.delegate && [self.delegate respondsToSelector:@selector(formDescriptor:didTriggerAction:field:tag:)]) {
-        [self.delegate formDescriptor:self didTriggerAction:formAction field:field.rowDescriptor.formRowDescriptor tag:field.rowDescriptor.tag];
+        [self.delegate formDescriptor:self didTriggerAction:formAction field:field.rowDescriptor.formFieldDescriptor tag:field.rowDescriptor.tag];
     }
     if (formAction == TFFormActionStateValueDidChange) {
         [self updateContentVisibility];
@@ -150,7 +150,7 @@
     }
 
     for (TFRowDescriptor *row in [self.tableDescriptor allRows]) {
-        TFFormFieldDescriptor *fieldDescriptor = row.formRowDescriptor;
+        TFFormFieldDescriptor *fieldDescriptor = row.formFieldDescriptor;
         if ([fieldDescriptor isKindOfClass:[TFFormFieldDescriptor class]] && fieldDescriptor.displayBlock) {
             row.hidden = !fieldDescriptor.displayBlock(self);
         }else row.hidden = NO;

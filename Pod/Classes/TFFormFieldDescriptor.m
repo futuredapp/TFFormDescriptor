@@ -18,7 +18,7 @@
     
     TFFormFieldDescriptor *formRowDescriptor = [[TFFormFieldDescriptor alloc] init];
     TFRowDescriptor *rowDescriptor = [TFRowDescriptor descriptorWithRowClass:c data:cfg tag:tag];
-    rowDescriptor.formRowDescriptor = formRowDescriptor;
+    rowDescriptor.formFieldDescriptor = formRowDescriptor;
     formRowDescriptor.rowDescriptor = rowDescriptor;
     
     return formRowDescriptor;

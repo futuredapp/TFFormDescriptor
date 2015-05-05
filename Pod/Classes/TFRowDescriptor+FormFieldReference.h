@@ -10,8 +10,8 @@
 
 @class TFFormFieldDescriptor;
 
-@interface TFRowDescriptor (FormRowReference)
+@interface TFRowDescriptor (FormFieldReference)
 
-@property (nonatomic) TFFormFieldDescriptor *formRowDescriptor;
+@property (nonatomic) TFFormFieldDescriptor *formFieldDescriptor;
 
 @end

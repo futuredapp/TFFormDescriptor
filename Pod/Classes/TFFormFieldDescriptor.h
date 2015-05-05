@@ -8,7 +8,7 @@
 
 #import <TFRowDescriptor.h>
 #import "TFFormBaseField.h"
-#import "TFRowDescriptor+FormRowReference.h"
+#import "TFRowDescriptor+FormFieldReference.h"
 
 @class TFFormSectionDescriptor,TFFormDescriptor;
 
