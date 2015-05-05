@@ -58,7 +58,7 @@
     self.contentView.backgroundColor = backgroundColor;
 }
 
-- (void)setContentPadding:(UIEdgeInsets)contentPadding UI_APPEARANCE_SELECTOR{
+- (void)setContentPadding:(UIEdgeInsets)contentPadding {
     self.leftPadding.constant =  contentPadding.left;
     self.rightPadding.constant = contentPadding.right;
     self.topPadding.constant = contentPadding.top;

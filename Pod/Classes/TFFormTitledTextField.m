@@ -8,6 +8,12 @@
 
 #import "TFFormTitledTextField.h"
 
+@interface TFFormTitledTextField ()
+
+@property (strong, nonatomic) NSMutableString *textFieldValue;
+
+@end
+
 @implementation TFFormTitledTextField
 
 
@@ -26,21 +32,36 @@
     
     return [TFRowConfiguration configurationWithBlock:^(TFFormTitledTextField *configuration) {
         configuration.titleLabel.text = title;
-        configuration.textField.placeholder = placeholder;
-        configuration.textField.text = value;
+        if([configuration.titleLabel.text length] == 0) {
+            configuration.titleMargin.constant = 0;
+        }
+        
+        if(placeholder) {
+            configuration.textField.placeholder = placeholder;
+        }
+        if(value){
+            configuration.textFieldValue = [[NSMutableString alloc] initWithString:value];
+        } else {
+            configuration.textFieldValue = [NSMutableString string];
+        }
     }];
     
+}
+
+- (void)setTextFieldValue:(NSMutableString *)textFieldValue{
+    _textFieldValue = textFieldValue;
+    self.textField.text = textFieldValue;
 }
 
 - (void)setValue:(id)value {
     
     if ([value isKindOfClass:[NSString class]]) {
-        self.textField.text = value;
+        self.textFieldValue = [[NSMutableString alloc] initWithString:value];
     }
 }
 
 - (id)value {
-    return self.textField.text;
+    return self.textFieldValue;
 }
 
 + (NSNumber *)height {
@@ -51,21 +72,44 @@
     [self triggerAction:TFFormActionStateValueDidChange];
 }
 
+#pragma mark - UITextFieldDelegate
 
-- (void)setTextFieldFont:(UIFont *)font UI_APPEARANCE_SELECTOR{
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    [self triggerAction:TFFormActionTextFieldDidBeginEditing];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    [self triggerAction:TFFormActionTextFieldDidEndEditing];
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    [self.textFieldValue replaceCharactersInRange:range withString:string];
+    [self triggerAction:TFFormActionStateValueDidChange];
+    return YES;
+}
+
+#pragma mark - UIAppearance
+
+- (void)setTextFieldFont:(UIFont *)font {
     self.textField.font = font;
 }
 
-- (void)setTextFieldTextColor:(UIColor *)textColor UI_APPEARANCE_SELECTOR{
+- (void)setTextFieldTextColor:(UIColor *)textColor {
     self.textField.textColor = textColor;
 }
 
-- (void)setTextFieldTextAlignment:(NSTextAlignment)textAlignment UI_APPEARANCE_SELECTOR{
+- (void)setTextFieldTextAlignment:(NSTextAlignment)textAlignment {
     self.textField.textAlignment = textAlignment;
 }
 
-- (void)setTextFieldBorderStyle:(UITextBorderStyle)borderStyle UI_APPEARANCE_SELECTOR{
+- (void)setTextFieldBorderStyle:(UITextBorderStyle)borderStyle {
     self.textField.borderStyle = borderStyle;
+}
+
+- (void)setTextFieldPlaceholderAttributes:(NSDictionary *)placeholderAttributes {
+    if(self.textField.placeholder) {
+        self.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.textField.placeholder attributes:placeholderAttributes];
+    }
 }
 
 @end

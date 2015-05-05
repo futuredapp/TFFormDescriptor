@@ -41,7 +41,7 @@
 
 + (NSNumber *)height {
     
-    return @40;
+    return @44;
 }
 
 - (IBAction)valueDidChange:(id)sender {
@@ -56,6 +56,10 @@
 
 - (void)setSwitchOnTintColor:(UIColor *)color {
     [self.switchControl setOnTintColor:color];
+}
+
+- (void)setSwitchThumbTintColor:(UIColor *)color {
+    [self.switchControl setThumbTintColor:color];
 }
 
 @end

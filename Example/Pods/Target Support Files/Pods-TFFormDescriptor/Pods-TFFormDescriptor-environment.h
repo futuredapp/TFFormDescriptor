@@ -6,6 +6,12 @@
 // project.
 
 
+// EAMTextView
+#define COCOAPODS_POD_AVAILABLE_EAMTextView
+#define COCOAPODS_VERSION_MAJOR_EAMTextView 0
+#define COCOAPODS_VERSION_MINOR_EAMTextView 0
+#define COCOAPODS_VERSION_PATCH_EAMTextView 3
+
 // TFFormDescriptor
 #define COCOAPODS_POD_AVAILABLE_TFFormDescriptor
 #define COCOAPODS_VERSION_MAJOR_TFFormDescriptor 0

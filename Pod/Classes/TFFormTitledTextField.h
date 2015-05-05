@@ -9,7 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "TFFormTitledBaseField.h"
 
-@interface TFFormTitledTextField : TFFormTitledBaseField
+typedef NS_ENUM(TFFormAction, TFFormActionTextField) {
+    TFFormActionTextFieldDidBeginEditing,
+    TFFormActionTextFieldDidEndEditing
+};
+
+@interface TFFormTitledTextField : TFFormTitledBaseField <UITextFieldDelegate>
 
 @property (strong, nonatomic) IBOutlet UITextField *textField;
 
@@ -19,6 +24,6 @@
 - (void)setTextFieldTextColor:(UIColor *)textColor UI_APPEARANCE_SELECTOR;
 - (void)setTextFieldTextAlignment:(NSTextAlignment)textAlignment UI_APPEARANCE_SELECTOR;
 - (void)setTextFieldBorderStyle:(UITextBorderStyle)borderStyle UI_APPEARANCE_SELECTOR;
-
+- (void)setTextFieldPlaceholderAttributes:(NSDictionary *)placeholderAttributes UI_APPEARANCE_SELECTOR;
 
 @end

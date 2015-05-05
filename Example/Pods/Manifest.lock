@@ -1,6 +1,8 @@
 PODS:
+  - EAMTextView (0.0.3)
   - Kiwi (2.3.1)
   - TFFormDescriptor (0.0.1):
+    - EAMTextView
     - TFTableDescriptor (~> 1.2.0)
   - TFTableDescriptor (1.2.0)
 
@@ -21,8 +23,9 @@ CHECKOUT OPTIONS:
     :git: https://github.com/thefuntasty/TFTableDescriptor
 
 SPEC CHECKSUMS:
+  EAMTextView: ff8da8bb4f894c8403e45f1ded47058c80775ae3
   Kiwi: f038a6c61f7a9e4d7766bff5717aa3b3fdb75f55
-  TFFormDescriptor: 9f740a97673e05d52185b6dc7c4a2f7597c08633
+  TFFormDescriptor: 682395135fa0e38a0378bf27d4b318fbb74846a2
   TFTableDescriptor: 83aa48081017fad3fc4ba89866a67b2ea7f31813
 
-COCOAPODS: 0.36.4
+COCOAPODS: 0.36.0

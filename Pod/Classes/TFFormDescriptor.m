@@ -50,7 +50,7 @@
 }
 
 + (NSArray *)defaultFormsClasses {
-    return @[[TFFormTitledTextField class], [TFFormTitledSwitchField class]];
+    return @[[TFFormTitledTextField class], [TFFormTitledSwitchField class], [TFFormTitledTextViewField class]];
 }
 
 #pragma mark - Adding sections and rows

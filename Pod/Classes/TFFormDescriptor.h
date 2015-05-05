@@ -12,6 +12,7 @@
 // Fields
 #import "TFFormTitledTextField.h"
 #import "TFFormTitledSwitchField.h"
+#import "TFFormTitledTextViewField.h"
 
 @class TFFormDescriptor;
 
