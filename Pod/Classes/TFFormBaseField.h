@@ -19,13 +19,13 @@ typedef NS_ENUM(TFFormAction, TFFormActionState) {
 
 @protocol TFFormBaseCellProtocol <NSObject>
 
-- (void)setValue:(id)value;
-- (id)value;
+- (void)updateValueData;
 - (void)configureAppearance:(TFFormGlobalAppearance *)appearance;
 
 @end
 
 @interface TFFormBaseField : TFBasicDescriptedCell<TFFormBaseCellProtocol>
+@property (strong, nonatomic) id valueData;
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *leftPadding;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *rightPadding;

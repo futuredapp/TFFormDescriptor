@@ -83,23 +83,24 @@
 }
 
 - (id)valueAtField:(TFFormFieldDescriptor *)fieldDescriptor {
-    return [self valueAtRow:fieldDescriptor.rowDescriptor];
+    return fieldDescriptor.value;
+//    return [self valueAtRow:fieldDescriptor.rowDescriptor];
 }
 
-- (id)valueAtRow:(TFRowDescriptor *)rowDescriptor {
-    TFFormBaseField *field = (TFFormBaseField *)[self.tableDescriptor cellForRow:rowDescriptor];
-// check disabled, has connection with this issue https://github.com/thefuntasty/TFFormDescriptor/issues/2
-//    NSAssert(field != nil, ([NSString stringWithFormat:@"Form field for tag %@ not found", field.rowDescriptor.tag]));
-    
-    return [field value];
-}
+//- (id)valueAtRow:(TFRowDescriptor *)rowDescriptor {
+//    TFFormBaseField *field = (TFFormBaseField *)[self.tableDescriptor cellForRow:rowDescriptor];
+//// check disabled, has connection with this issue https://github.com/thefuntasty/TFFormDescriptor/issues/2
+////    NSAssert(field != nil, ([NSString stringWithFormat:@"Form field for tag %@ not found", field.rowDescriptor.tag]));
+//    
+//    return [field value];
+//}
 
 - (NSDictionary *)allValues {
     
     NSMutableDictionary *mutableDict = [@{} mutableCopy];
     
     for (TFRowDescriptor *rowDescriptor in [self.tableDescriptor allRows]) {
-        id value = [self valueAtRow:rowDescriptor];
+        id value = [self valueAtField:rowDescriptor.formRowDescriptor];
         if (value){
             [mutableDict setObject:value forKey:rowDescriptor.tag];
         }

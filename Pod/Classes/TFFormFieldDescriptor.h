@@ -16,6 +16,7 @@
 
 @property (strong, nonatomic) TFRowDescriptor *rowDescriptor;
 @property (weak, nonatomic) TFFormSectionDescriptor *formSectionDescriptor;
+
 @property (strong, nonatomic) id value;
 
 @property (copy, nonatomic) BOOL (^displayBlock)(TFFormDescriptor *formDescriptor);

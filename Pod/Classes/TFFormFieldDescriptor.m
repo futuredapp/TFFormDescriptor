@@ -23,12 +23,10 @@
     return formRowDescriptor;
 }
 
-- (id)value{
-    return [self.formSectionDescriptor.formDescriptor valueAtField:self];
-}
-- (void)setValue:(id)value{
-    return [self.formSectionDescriptor.formDescriptor setValue:value atField:self];
-}
 
+-(void)setValue:(id)value{
+    _value = value;
+    
+}
 
 @end

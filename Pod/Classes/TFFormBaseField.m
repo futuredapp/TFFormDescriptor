@@ -15,11 +15,11 @@
 @implementation TFFormBaseField
 
 - (void)setValue:(id)value {
-    
+    [self.rowDescriptor.formRowDescriptor setValue:value];
 }
 
 - (id)value {
-    return nil;
+    return self.rowDescriptor.formRowDescriptor.value;
 }
 
 /// Do not subclass this unless you know what are you doing!
@@ -35,6 +35,17 @@
     
     [self.rowDescriptor.section.tableDescriptor.formDescriptor triggerAction:formAction forField:self];
     
+}
+
+- (void)updateValueData{
+    
+}
+
+-(id)valueData{
+    return self.rowDescriptor.formRowDescriptor.value;
+}
+-(void)setValueData:(id)valueData{
+    self.rowDescriptor.formRowDescriptor.value = valueData;
 }
 
 - (void)configureAppearance:(TFFormGlobalAppearance *)appearance {
