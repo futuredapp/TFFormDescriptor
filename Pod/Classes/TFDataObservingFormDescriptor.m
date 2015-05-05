@@ -9,12 +9,14 @@
 #import "TFDataObservingFormDescriptor.h"
 
 #import "TFRowDescriptor+FormRowReference.h"
+#import "TFTableDescriptor.h"
 
 static void *TFDataObservingFormDescriptorKeyPathContext = &TFDataObservingFormDescriptorKeyPathContext;
 
 @interface TFDataObservingFormDescriptor ()
 @property (copy, nonatomic) NSString *currentlyChangingKey;
 @property (strong, nonatomic) NSMutableArray *observedKeyPaths;
+@property (strong, nonatomic) TFTableDescriptor *tableDescriptor;
 @end
 
 @implementation TFDataObservingFormDescriptor
@@ -39,11 +41,12 @@ static void *TFDataObservingFormDescriptorKeyPathContext = &TFDataObservingFormD
 - (void)updateObserver{
     [self unregisterObserver];
     if (self.data) {
-        NSDictionary *values = [self allValues];
         self.observedKeyPaths = [NSMutableArray array];
-        for (NSString *key in values) {
-            [self.data addObserver:self forKeyPath:key options:0 context:TFDataObservingFormDescriptorKeyPathContext];
-            [self.observedKeyPaths addObject:key];
+        for (TFRowDescriptor *row in [self.tableDescriptor allRows]) {
+            if (row.formRowDescriptor) {
+                [self.data addObserver:self forKeyPath:row.tag options:0 context:TFDataObservingFormDescriptorKeyPathContext];
+                [self.observedKeyPaths addObject:row.tag];
+            }
         }
     }else{
         self.observedKeyPaths = nil;
@@ -73,7 +76,7 @@ static void *TFDataObservingFormDescriptorKeyPathContext = &TFDataObservingFormD
 
 - (void)triggerAction:(TFFormAction)formAction forField:(TFFormBaseField *)field{
     if (formAction == TFFormActionStateValueDidChange) {
-        [self setDataValue:[field value] forKeyPath:field.rowDescriptor.tag];
+        [self setDataValue:[field valueData] forKeyPath:field.rowDescriptor.tag];
     }
     [super triggerAction:formAction forField:field];
 }

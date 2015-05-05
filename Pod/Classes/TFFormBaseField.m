@@ -28,6 +28,8 @@
         ((TFRowConfiguration *)data).configuration(self);
     }
     
+    [self updateValueData];
+    
     [self configureAppearance:[TFFormGlobalAppearance appearance]];
 }
 
@@ -46,6 +48,7 @@
 }
 -(void)setValueData:(id)valueData{
     self.rowDescriptor.formRowDescriptor.value = valueData;
+    [self triggerAction:TFFormActionStateValueDidChange];
 }
 
 - (void)configureAppearance:(TFFormGlobalAppearance *)appearance {

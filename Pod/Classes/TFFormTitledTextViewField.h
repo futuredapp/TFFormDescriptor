@@ -21,7 +21,7 @@ typedef NS_ENUM(TFFormAction, TFFormActionTextView) {
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *textViewHeightConstraint;
 
 
-+ (TFRowConfiguration *)configurationWithTitle:(NSString *)title placeholder:(NSString *)placeholder value:(NSString *)value;
++ (TFRowConfiguration *)configurationWithTitle:(NSString *)title placeholder:(NSString *)placeholder;
 
 - (void)setTextViewFont:(UIFont *)font UI_APPEARANCE_SELECTOR;
 - (void)setTextViewTextColor:(UIColor *)textColor UI_APPEARANCE_SELECTOR;

@@ -20,7 +20,7 @@
     // Configure the view for the selected state
 }
 
-+ (TFRowConfiguration *)configurationWithTitle:(NSString *)title placeholder:(NSString *)placeholder value:(NSString *)value {
++ (TFRowConfiguration *)configurationWithTitle:(NSString *)title placeholder:(NSString *)placeholder{
     
     return [TFRowConfiguration configurationWithBlock:^(TFFormTitledTextViewField *configuration) {
         configuration.titleLabel.text = title;
@@ -29,9 +29,6 @@
         }
         if(placeholder) {
             configuration.textView.placeholder = placeholder;
-        }
-        if(value){
-            configuration.textView.text = value;
         }
        
         /*
@@ -42,15 +39,11 @@
     
 }
 
-- (void)setValue:(id)value {
+- (void)updateValueData{
     
-    if ([value isKindOfClass:[NSString class]]) {
-        self.textView.text = value;
+    if ([self.valueData isKindOfClass:[NSString class]]) {
+        self.textView.text = self.valueData;
     }
-}
-
-- (id)value {
-    return self.textView.text;
 }
 
 + (NSNumber *)height {

@@ -32,7 +32,7 @@
     [[TFFormTitledSwitchField appearance] setSwitchThumbTintColor:[UIColor blackColor]];
     
     [[TFFormTitledTextField appearance] setContentPadding:UIEdgeInsetsMake(10, 10, 10, 10)];
-    [[TFFormTitledTextField appearance] setTextFieldTextColor:[UIColor whiteColor]];
+    [[TFFormTitledTextField appearance] setTextFieldTextColor:[UIColor grayColor]];
     [[TFFormTitledTextField appearance] setTextFieldBorderStyle:UITextBorderStyleNone];
     [[TFFormTitledTextField appearance] setTextFieldTextAlignment:NSTextAlignmentRight];
     [[TFFormTitledTextField appearance] setTextFieldPlaceholderAttributes:@{ NSForegroundColorAttributeName : [UIColor redColor] }];

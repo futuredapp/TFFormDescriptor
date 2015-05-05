@@ -13,7 +13,7 @@
 
 @property (strong, nonatomic) IBOutlet UISwitch *switchControl;
 
-+ (TFRowConfiguration *)configurationWithTitle:(NSString *)title value:(BOOL)value;
++ (TFRowConfiguration *)configurationWithTitle:(NSString *)title;
 
 #pragma mark - UIAppearance
 

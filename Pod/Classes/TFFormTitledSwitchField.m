@@ -20,23 +20,19 @@
     // Configure the view for the selected state
 }
 
-+ (TFRowConfiguration *)configurationWithTitle:(NSString *)title value:(BOOL)value {
++ (TFRowConfiguration *)configurationWithTitle:(NSString *)title{
     return [TFRowConfiguration configurationWithBlock:^(TFFormTitledSwitchField *configuration) {
         configuration.titleLabel.text = title;
-        configuration.switchControl.on = value;
     }];
 }
 
-- (void)setValue:(id)value {
-    
-    if ([value isKindOfClass:[NSNumber class]]) {
-        self.switchControl.on = [value boolValue];
-    }
-}
 
-- (id)value {
-    NSLog(@"%@ => %i",self.switchControl,self.switchControl.on);
-    return @(self.switchControl.on);
+- (void)updateValueData{
+    if ([self.valueData isKindOfClass:[NSNumber class]]) {
+        self.switchControl.on = [self.valueData boolValue];
+    }else{
+        self.switchControl.on = NO;
+    }
 }
 
 + (NSNumber *)height {
@@ -45,7 +41,7 @@
 }
 
 - (IBAction)valueDidChange:(id)sender {
-    [self triggerAction:TFFormActionStateValueDidChange];
+    self.valueData = @(self.switchControl.on);
 }
 
 #pragma mark - UIAppearance

@@ -75,25 +75,12 @@
     TFRowDescriptor *rowDescriptor = [self.tableDescriptor rowForTag:tag];
     NSAssert(rowDescriptor != nil, ([NSString stringWithFormat:@"Row with tag %@ not found", tag]));
     
-    
-//    TFFormBaseField *field = (TFFormBaseField *)[self.tableDescriptor cellForRow:rowDescriptor];
-//    NSAssert(rowDescriptor.formRowDescriptor != nil, ([NSString stringWithFormat:@"Form field for tag %@ not found", tag]));
-    
     return [self valueAtField:rowDescriptor.formRowDescriptor];
 }
 
 - (id)valueAtField:(TFFormFieldDescriptor *)fieldDescriptor {
     return fieldDescriptor.value;
-//    return [self valueAtRow:fieldDescriptor.rowDescriptor];
 }
-
-//- (id)valueAtRow:(TFRowDescriptor *)rowDescriptor {
-//    TFFormBaseField *field = (TFFormBaseField *)[self.tableDescriptor cellForRow:rowDescriptor];
-//// check disabled, has connection with this issue https://github.com/thefuntasty/TFFormDescriptor/issues/2
-////    NSAssert(field != nil, ([NSString stringWithFormat:@"Form field for tag %@ not found", field.rowDescriptor.tag]));
-//    
-//    return [field value];
-//}
 
 - (NSDictionary *)allValues {
     
@@ -107,6 +94,13 @@
     }
     
     return [mutableDict copy];
+}
+
+- (void)updateValueDataAtField:(TFFormFieldDescriptor *)fieldDescriptor{
+    TFFormBaseField *field = (TFFormBaseField *)[self.tableDescriptor cellForRow:fieldDescriptor.rowDescriptor];
+    if ([field isKindOfClass:[TFFormBaseField class]]) {
+        [field updateValueData];
+    }
 }
 
 #pragma mark Field value - settings
@@ -124,10 +118,11 @@
     [self setValue:value atRow:fieldDescriptor.rowDescriptor];
 }
 - (void)setValue:(id)value atRow:(TFRowDescriptor *)rowDescriptor {
-    TFFormBaseField *field = (TFFormBaseField *)[self.tableDescriptor cellForRow:rowDescriptor];
-    NSAssert(field != nil, ([NSString stringWithFormat:@"Form field for tag %@ not found", field.rowDescriptor.tag]));
+//    TFFormBaseField *field = (TFFormBaseField *)[self.tableDescriptor cellForRow:rowDescriptor];
+//    NSAssert(field != nil, ([NSString stringWithFormat:@"Form field for tag %@ not found", field.rowDescriptor.tag]));
     
-    [field setValue:value];
+    [rowDescriptor.formRowDescriptor setValue:value];
+    [self updateValueDataAtField:rowDescriptor.formRowDescriptor];
 }
 
 #pragma mark - Actions

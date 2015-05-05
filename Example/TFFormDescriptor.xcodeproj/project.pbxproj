@@ -23,6 +23,8 @@
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		902197311AECF0FB009B33FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9021972F1AECF0FB009B33FA /* Main.storyboard */; };
+		EE4BD1F71AF85830001AB4A5 /* TFVisibilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE81550F1AF3E21E00E92BFB /* TFVisibilityViewController.m */; };
+		EE4BD1F81AF85833001AB4A5 /* TFDataObservingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EED0D1FD1AF40A2A0070DB2A /* TFDataObservingViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -397,9 +399,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EE8155101AF3E21E00E92BFB /* TFVisibilityViewController.m in Sources */,
+				EE4BD1F71AF85830001AB4A5 /* TFVisibilityViewController.m in Sources */,
 				6003F59E195388D20070C39A /* TFAppDelegate.m in Sources */,
-				EED0D1FE1AF40A2A0070DB2A /* TFDataObservingViewController.m in Sources */,
+				EE4BD1F81AF85833001AB4A5 /* TFDataObservingViewController.m in Sources */,
 				6003F5A7195388D20070C39A /* TFViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 			);

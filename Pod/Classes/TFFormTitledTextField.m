@@ -28,7 +28,7 @@
 }
 
 
-+ (TFRowConfiguration *)configurationWithTitle:(NSString *)title placeholder:(NSString *)placeholder value:(NSString *)value {
++ (TFRowConfiguration *)configurationWithTitle:(NSString *)title placeholder:(NSString *)placeholder{
     
     return [TFRowConfiguration configurationWithBlock:^(TFFormTitledTextField *configuration) {
         configuration.titleLabel.text = title;
@@ -39,30 +39,26 @@
         if(placeholder) {
             configuration.textField.placeholder = placeholder;
         }
-        if(value){
-            configuration.textFieldValue = [[NSMutableString alloc] initWithString:value];
-        } else {
-            configuration.textFieldValue = [NSMutableString string];
-        }
     }];
     
 }
 
 - (void)setTextFieldValue:(NSMutableString *)textFieldValue{
     _textFieldValue = textFieldValue;
-    self.textField.text = textFieldValue;
-}
-
-- (void)setValue:(id)value {
-    
-    if ([value isKindOfClass:[NSString class]]) {
-        self.textFieldValue = [[NSMutableString alloc] initWithString:value];
+    if(textFieldValue){
+        self.textField.text = [[NSMutableString alloc] initWithString:textFieldValue];
+    } else {
+        self.textField.text = [NSMutableString string];
     }
 }
 
-- (id)value {
-    return self.textFieldValue;
+- (void)updateValueData{
+    
+    if ([self.valueData isKindOfClass:[NSString class]]) {
+        self.textFieldValue = [[NSMutableString alloc] initWithString:self.valueData];
+    }
 }
+
 
 + (NSNumber *)height {
     return @40;
@@ -83,7 +79,8 @@
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    [self.textFieldValue replaceCharactersInRange:range withString:string];
+    self.valueData = [textField.text stringByReplacingCharactersInRange:range withString:string];
+//    [self.textFieldValue replaceCharactersInRange:range withString:string];
     [self triggerAction:TFFormActionStateValueDidChange];
     return YES;
 }

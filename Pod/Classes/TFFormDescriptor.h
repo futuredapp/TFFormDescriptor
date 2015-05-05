@@ -46,6 +46,8 @@
 /// Values in dictionary where key is row tag
 - (NSDictionary *)allValues;
 
+- (void)updateValueDataAtField:(TFFormFieldDescriptor *)fieldDescriptor;
+
 #pragma mark - Actions
 
 - (void)triggerAction:(TFFormAction)formAction forField:(TFFormBaseField *)field;

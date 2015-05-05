@@ -18,7 +18,7 @@ typedef NS_ENUM(TFFormAction, TFFormActionTextField) {
 
 @property (strong, nonatomic) IBOutlet UITextField *textField;
 
-+ (TFRowConfiguration *)configurationWithTitle:(NSString *)title placeholder:(NSString *)placeholder value:(NSString *)value;
++ (TFRowConfiguration *)configurationWithTitle:(NSString *)title placeholder:(NSString *)placeholder;
 
 - (void)setTextFieldFont:(UIFont *)font UI_APPEARANCE_SELECTOR;
 - (void)setTextFieldTextColor:(UIColor *)textColor UI_APPEARANCE_SELECTOR;
