@@ -86,7 +86,11 @@ static void *TFDataObservingFormDescriptorKeyPathContext = &TFDataObservingFormD
 
 - (void)setDataValue:(id)value forKeyPath:(NSString *)keyPath{
     self.currentlyChangingKey = keyPath;
-    self.data[self.currentlyChangingKey] = value;
+    if([self.data respondsToSelector:@selector(setObject:forKeyedSubscript:)]){
+        self.data[self.currentlyChangingKey] = value;
+    }else{
+        [self.data setValue:value forKey:self.currentlyChangingKey];
+    }
     self.currentlyChangingKey = nil;
 }
 
