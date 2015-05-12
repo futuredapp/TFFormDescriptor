@@ -29,6 +29,10 @@ static void *TFDataObservingFormDescriptorKeyPathContext = &TFDataObservingFormD
     
     _data = data;
     
+    for (TFRowDescriptor *row in [self.tableDescriptor allRows]) {
+        [self setValue:[self.data valueForKey:row.tag] atFieldWithTag:row.tag];
+    }
+    
     [self updateObserver];
 }
 
