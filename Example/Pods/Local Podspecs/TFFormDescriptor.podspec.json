@@ -20,7 +20,7 @@
   "resources": "Pod/Classes/**/*.{xib}",
   "dependencies": {
     "TFTableDescriptor": [
-      "~> 1.2.0"
+
     ],
     "EAMTextView": [
 

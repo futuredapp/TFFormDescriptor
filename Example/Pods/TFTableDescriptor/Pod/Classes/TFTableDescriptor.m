@@ -254,6 +254,8 @@
         assert(true);
     }
     
+    cell.rowDescriptor = row;
+    
     if ([cell conformsToProtocol:@protocol(TFTableDescriptorConfigurableCellProtocol)]) {
         [cell configureWithData:row.data];
     }
@@ -261,8 +263,6 @@
 //    if ([cell respondsToSelector:@selector(delegate)]) {
 //        [cell setValue:self forKey:@"delegate"];
 //    }
-    
-    cell.rowDescriptor = row;
     
     return cell;
 }
@@ -590,6 +590,14 @@
     }
     
     return [NSIndexPath indexPathForRow:rowIndex inSection:sectionIndex];
+}
+
+#pragma mark - UIScrollView delegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(tableViewDidScroll:)]) {
+        [self.delegate tableViewDidScroll:self.tableView];
+    }
 }
 
 @end

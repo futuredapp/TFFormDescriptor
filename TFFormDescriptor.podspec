@@ -32,7 +32,7 @@ Pod::Spec.new do |s|
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-  s.dependency 'TFTableDescriptor', '~> 1.2.0'
+  s.dependency 'TFTableDescriptor'
   #s.dependency 'TFTableDescriptor'
   s.dependency 'EAMTextView'
 
