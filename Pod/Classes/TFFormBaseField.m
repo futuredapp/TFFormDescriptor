@@ -55,6 +55,14 @@
     
 }
 
+- (void)wasSelected{
+    
+}
+
+- (void)wasDeselected{
+    
+}
+
 #pragma mark - UIAppearance 
 
 - (void)setBackgroundColor:(UIColor *)backgroundColor {

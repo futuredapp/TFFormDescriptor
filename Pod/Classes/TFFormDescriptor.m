@@ -65,7 +65,16 @@
 #pragma mark - TFTableDescriptor delegate
 
 - (void)tableDescriptor:(TFTableDescriptor *)descriptor didSelectRow:(TFRowDescriptor *)rowDescriptor {
-
+    TFFormBaseField *field = (TFFormBaseField *)[descriptor cellForRow:rowDescriptor];
+    if ([field isKindOfClass:[TFFormBaseField class]]) {
+        [field wasSelected];
+    }
+}
+- (void)tableDescriptor:(TFTableDescriptor *)descriptor didDeselectRow:(TFRowDescriptor *)rowDescriptor {
+    TFFormBaseField *field = (TFFormBaseField *)[descriptor cellForRow:rowDescriptor];
+    if ([field isKindOfClass:[TFFormBaseField class]]) {
+        [field wasDeselected];
+    }
 }
 
 
@@ -124,6 +133,7 @@
     [rowDescriptor.formFieldDescriptor setValue:value];
     [self updateValueDataAtField:rowDescriptor.formFieldDescriptor];
 }
+
 
 #pragma mark - Actions
 

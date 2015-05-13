@@ -37,4 +37,8 @@ typedef NS_ENUM(TFFormAction, TFFormActionState) {
 - (void)setBackgroundColor:(UIColor *)backgroundColor UI_APPEARANCE_SELECTOR;
 - (void)setContentPadding:(UIEdgeInsets)contentPadding UI_APPEARANCE_SELECTOR;
 
+
+- (void)wasSelected;
+- (void)wasDeselected;
+
 @end
