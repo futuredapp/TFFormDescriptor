@@ -30,7 +30,9 @@ static void *TFDataObservingFormDescriptorKeyPathContext = &TFDataObservingFormD
     _data = data;
     
     for (TFRowDescriptor *row in [self.tableDescriptor allRows]) {
-        [self setValue:[self.data valueForKey:row.tag] atFieldWithTag:row.tag];
+        if (row.tag) {
+            [self setValue:[self.data valueForKey:row.tag] atFieldWithTag:row.tag];
+        }
     }
     
     [self updateObserver];
@@ -47,7 +49,7 @@ static void *TFDataObservingFormDescriptorKeyPathContext = &TFDataObservingFormD
     if (self.data) {
         self.observedKeyPaths = [NSMutableArray array];
         for (TFRowDescriptor *row in [self.tableDescriptor allRows]) {
-            if (row.formFieldDescriptor) {
+            if (row.formFieldDescriptor && row.tag) {
                 [self.data addObserver:self forKeyPath:row.tag options:0 context:TFDataObservingFormDescriptorKeyPathContext];
                 [self.observedKeyPaths addObject:row.tag];
             }

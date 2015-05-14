@@ -96,9 +96,11 @@
     NSMutableDictionary *mutableDict = [@{} mutableCopy];
     
     for (TFRowDescriptor *rowDescriptor in [self.tableDescriptor allRows]) {
-        id value = [self valueAtField:rowDescriptor.formFieldDescriptor];
-        if (value){
-            [mutableDict setObject:value forKey:rowDescriptor.tag];
+        if (rowDescriptor.tag) {
+            id value = [self valueAtField:rowDescriptor.formFieldDescriptor];
+            if (value){
+                [mutableDict setObject:value forKey:rowDescriptor.tag];
+            }
         }
     }
     
