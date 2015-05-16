@@ -19,7 +19,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   TFTableDescriptor:
-    :commit: 2d1f7c9080169791d8bbc58f910172e4431fa1e4
+    :commit: b3dff55dcab69d4806b5a43a15155212c1edc390
     :git: https://github.com/thefuntasty/TFTableDescriptor
 
 SPEC CHECKSUMS:

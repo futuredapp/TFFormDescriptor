@@ -18,6 +18,8 @@
 
 @property (strong, nonatomic) TFTableDescriptor *tableDescriptor;
 
+@property (strong, nonatomic) NSMutableArray *sections;
+
 @end
 
 @implementation TFFormDescriptor
@@ -55,9 +57,16 @@
 
 #pragma mark - Adding sections and rows
 
+- (NSMutableArray *)sections{
+    if (!_sections) {
+        _sections = [NSMutableArray array];
+    }
+    return _sections;
+}
 
 - (void)addSection:(TFFormSectionDescriptor *)formSectionDescriptor; {
     [self.tableDescriptor addSection:formSectionDescriptor.sectionDescriptor];
+    [self.sections addObject:formSectionDescriptor];
     formSectionDescriptor.formDescriptor = self;
     [self updateContentVisibility];
 }
@@ -154,8 +163,8 @@
 - (void)updateContentVisibility{
     [self.tableDescriptor beginUpdates];
     
-    for (TFSectionDescriptor *section in [self.tableDescriptor allSections]) {
-        TFFormSectionDescriptor *formSection = section.formSectionDescriptor;
+    for (TFSectionDescriptor *section in self.sections) {
+        TFFormSectionDescriptor *formSection = section;
         if ([section isKindOfClass:[TFFormSectionDescriptor class]] && formSection.displayBlock) {
             formSection.sectionDescriptor.hidden = !formSection.displayBlock(self);
         }else formSection.sectionDescriptor.hidden = NO;

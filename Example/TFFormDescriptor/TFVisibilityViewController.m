@@ -45,6 +45,17 @@
     
     
     [form addSection:section];
+
+    section = [TFFormSectionDescriptor descriptorWithTag:1 data:nil];
+    textField = [TFFormFieldDescriptor descriptorWithClass:[TFFormTitledTextField class] configuration:[TFFormTitledTextField configurationWithTitle:@"Row in section" placeholder:@"fiat, seat, audi, kia, hyundai"] tag:nil];
+    [section addRow:textField];
+
+    
+    [section setDisplayBlock:^BOOL(TFFormDescriptor *formDescriptor) {
+        return [[hasCarField value] boolValue];
+    }];
+    
+    [form addSection:section];
     
     self.formDescriptor = form;
     
