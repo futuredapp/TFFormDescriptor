@@ -163,18 +163,22 @@
 - (void)updateContentVisibility{
     [self.tableDescriptor beginUpdates];
     
-    for (TFSectionDescriptor *section in self.sections) {
+    for (TFFormSectionDescriptor *section in self.sections) {
         TFFormSectionDescriptor *formSection = section;
+        BOOL hidden = NO;
         if ([section isKindOfClass:[TFFormSectionDescriptor class]] && formSection.displayBlock) {
-            formSection.sectionDescriptor.hidden = !formSection.displayBlock(self);
-        }else formSection.sectionDescriptor.hidden = NO;
+            hidden = !formSection.displayBlock(self);
+        }else hidden = NO;
+        [formSection.sectionDescriptor setHidden:hidden withRowAnimation:UITableViewRowAnimationFade];
     }
 
     for (TFRowDescriptor *row in [self.tableDescriptor allRows]) {
         TFFormFieldDescriptor *fieldDescriptor = row.formFieldDescriptor;
+        BOOL hidden = NO;
         if ([fieldDescriptor isKindOfClass:[TFFormFieldDescriptor class]] && fieldDescriptor.displayBlock) {
-            row.hidden = !fieldDescriptor.displayBlock(self);
-        }else row.hidden = NO;
+            hidden = !fieldDescriptor.displayBlock(self);
+        }else hidden = NO;
+        [row setHidden:hidden withRowAnimation:UITableViewRowAnimationFade];
     }
     
     [self.tableDescriptor endUpdates];

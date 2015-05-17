@@ -16,8 +16,6 @@
 @property (weak) id target;
 @property (nonatomic) SEL selector;
 
-
-
 @end
 
 @implementation TFRowDescriptor
@@ -37,6 +35,16 @@
     
     return row;
 }
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _cellHeight = @(-1);
+    }
+    return self;
+}
+
 
 - (void)setTarget:(id)target withSelector:(SEL)selector {
     self.selector = selector;
@@ -69,34 +77,71 @@
 
 #pragma mark - Visibility
 
-- (void)setHidden:(BOOL)hidden {
-    [self setHidden:hidden withRowAnimation:UITableViewRowAnimationAutomatic];
+- (void)setHidden:(BOOL)hidden withRowAnimation:(UITableViewRowAnimation)rowAnimation {
+    [self setHidden:hidden withRowAnimation:rowAnimation updateBlock:nil];
 }
 
-- (void)setHidden:(BOOL)hidden withRowAnimation:(UITableViewRowAnimation)rowAnimation {
+- (void)setHidden:(BOOL)hidden withRowAnimation:(UITableViewRowAnimation)rowAnimation updateBlock:(TFCellConfigureBlock)updateBlock {
     
     if (_hidden == hidden) {
         return;
     }
     
-    NSIndexPath *indexPathToDelete = nil;
-    NSIndexPath *indexPathToInsert = nil;
-    
     if (hidden) {
-        indexPathToDelete = [self.section.tableDescriptor indexPathForVisibleRow:self];
+        [self.section.tableDescriptor addRowForDeleting:self rowAnimation:rowAnimation];
+    }else{
+        [self.section.tableDescriptor addRowForInserting:self rowAnimation:rowAnimation];
     }
     
-    _hidden = hidden;
-
-    if (!hidden) {
-        indexPathToInsert = [self.section.tableDescriptor indexPathForVisibleRow:self];
+    UITableViewCell *cell = [self.section.tableDescriptor cellForRow:self];
+    if (cell && updateBlock) {
+        updateBlock(cell);
     }
+    
+//    NSIndexPath *indexPathToDelete = nil;
+//    NSIndexPath *indexPathToInsert = nil;
+//    
+//    if (hidden) {
+//        indexPathToDelete = [self.section.tableDescriptor indexPathForVisibleRow:self];
+//    }
+//    
+//    _hidden = hidden;
+//    
+//    if (!hidden) {
+//        indexPathToInsert = [self.section.tableDescriptor indexPathForVisibleRow:self];
+//    }
+//    
+//    if (indexPathToInsert) {
+//        
+//        [self.section.tableDescriptor.tableView insertRowsAtIndexPaths:@[indexPathToInsert] withRowAnimation:rowAnimation];
+//        UITableViewCell *cell = [self.section.tableDescriptor cellForRow:self];
+//        if (cell && updateBlock) {
+//            updateBlock(cell);
+//        }
+//    } else if (indexPathToDelete) {
+//        UITableViewCell *cell = [self.section.tableDescriptor cellForRow:self];
+//        if (cell && updateBlock) {
+//            
+//            updateBlock(cell);
+//            
+//        }
+//        
+//        [self.section.tableDescriptor.tableView deleteRowsAtIndexPaths:@[indexPathToDelete] withRowAnimation:rowAnimation];
+//        
+//    }
+}
 
-    if (indexPathToInsert) {
-        [self.section.tableDescriptor.tableView insertRowsAtIndexPaths:@[indexPathToInsert] withRowAnimation:rowAnimation];
-    }
-    if (indexPathToDelete) {
-        [self.section.tableDescriptor.tableView deleteRowsAtIndexPaths:@[indexPathToDelete] withRowAnimation:rowAnimation];
+- (void)setHidden:(BOOL)hidden withCustomAnimation:(TFCustomRowAnimation)rowAnimation {
+    [self setHidden:hidden withRowAnimation:UITableViewRowAnimationNone updateBlock:rowAnimation];
+}
+
+#pragma mark - Custom setters
+
+- (void)setCellHeight:(NSNumber *)cellHeight {
+    _cellHeight = cellHeight;
+    
+    if (self.section && self.section.tableDescriptor) {
+        [self.section.tableDescriptor updateCellHeightWithRowDescriptor:self];
     }
 }
 

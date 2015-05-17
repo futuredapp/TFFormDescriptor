@@ -15,6 +15,12 @@
 @property (nonatomic, strong) NSCache *cellSizeCache;
 @property (nonatomic, strong) NSMutableArray *array;
 
+@property (strong, nonatomic) NSMutableArray *indexPathsToDelete;
+@property (strong, nonatomic) NSMutableArray *indexPathsToInsert;
+
+@property (strong, nonatomic) NSMutableArray *sectionsToDelete;
+@property (strong, nonatomic) NSMutableArray *sectionsToInsert;
+
 @end
 
 @implementation TFTableDescriptor
@@ -58,6 +64,9 @@
 - (NSInteger)numberOfSections {
     return self.sections.count;
 }
+- (NSInteger)numberOfVisibleSections{
+    return self.allVisibleSections.count;
+}
 
 
 #pragma mark - Section access
@@ -70,14 +79,30 @@
 }
 
 - (TFSectionDescriptor *)sectionAtSectionIndex:(NSInteger)section {
-    if (section >= self.sections.count) {
-        [[NSException exceptionWithName:@"Out of bounds" reason:@"Attempt to reach nonexisting section" userInfo:@{@"sectionIndex": @(section), @"sections": self.sections}] raise];
+    if (section >= [self allSections].count) {
+        [[NSException exceptionWithName:@"Out of bounds" reason:@"Attempt to reach nonexisting visible section" userInfo:@{@"sectionIndex": @(section), @"sections": self.sections}] raise];
     }
-    return self.sections[section];
+    return [self allSections][section];
 }
 
 - (TFSectionDescriptor *)sectionForTag:(NSInteger)tag {
     for (TFSectionDescriptor *section in self.sections) {
+        if (section.tag == tag) {
+            return section;
+        }
+    }
+    
+    return nil;
+}
+
+- (TFSectionDescriptor *)visibleSectionAtSectionIndex:(NSInteger)section{
+    if (section >= [self allVisibleSections].count) {
+        [[NSException exceptionWithName:@"Out of bounds" reason:@"Attempt to reach nonexisting visible section" userInfo:@{@"sectionIndex": @(section), @"sections": self.sections}] raise];
+    }
+    return [self allVisibleSections][section];
+}
+- (TFSectionDescriptor *)visibleSectionForTag:(NSInteger)tag{
+    for (TFSectionDescriptor *section in self.allVisibleSections) {
         if (section.tag == tag) {
             return section;
         }
@@ -107,21 +132,47 @@
     
     NSAssert(indexPath != nil, @"IndexPath cannot be nil!");
     
-    if (indexPath.section >= self.sections.count) {
+    NSArray *sections = [self allSections];
+    
+    if (indexPath.section >= sections.count) {
         [[NSException exceptionWithName:@"Out of bounds" reason:@"Attempt to reach nonexisting section" userInfo:@{@"indexPath": indexPath, @"sections": self.sections}] raise];
     }
     
-    if (indexPath.row >= [self.sections[indexPath.section] numberOfRows]) {
+    if (indexPath.row >= [sections[indexPath.section] numberOfRows]) {
         [[NSException exceptionWithName:@"Out of bounds" reason:@"Attempt to reach nonexisting row" userInfo:@{@"indexPath": indexPath, @"rows": self.sections[indexPath.section]}] raise];
     }
     
-    return [self.sections[indexPath.section] rowAtRowIndex:indexPath.row];
+    return [sections[indexPath.section] rowAtRowIndex:indexPath.row];
 }
 
 - (TFRowDescriptor *)rowForTag:(NSString *)tag {
     NSIndexPath *indexPath = [self indexPathForRowTag:tag];
     if (indexPath) {
         return [self rowAtIndexPath:indexPath];
+    } else {
+        return nil;
+    }
+}
+
+- (TFRowDescriptor *)visibleRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSAssert(indexPath != nil, @"IndexPath cannot be nil!");
+    
+    NSArray *sections = [self allVisibleSections];
+    
+    if (indexPath.section >= sections.count) {
+        [[NSException exceptionWithName:@"Out of bounds" reason:@"Attempt to reach nonexisting section" userInfo:@{@"indexPath": indexPath, @"sections": self.sections}] raise];
+    }
+    
+    if (indexPath.row >= [sections[indexPath.section] numberOfRows]) {
+        [[NSException exceptionWithName:@"Out of bounds" reason:@"Attempt to reach nonexisting row" userInfo:@{@"indexPath": indexPath, @"rows": self.sections[indexPath.section]}] raise];
+    }
+    
+    return [sections[indexPath.section] rowAtRowIndex:indexPath.row];
+}
+- (TFRowDescriptor *)visibleRowForTag:(NSString *)tag{
+    NSIndexPath *indexPath = [self indexPathForRowTag:tag];
+    if (indexPath) {
+        return [self visibleRowAtIndexPath:indexPath];
     } else {
         return nil;
     }
@@ -142,6 +193,21 @@
     return nil;
 }
 
+- (NSIndexPath *)indexPathForVisibleRowTag:(NSString *)tag{
+    NSUInteger sectionIndex = 0;
+    
+    for (TFSectionDescriptor *section in self.allVisibleSections) {
+        for (int ri = 0; ri < section.numberOfVisibleRows; ri++) {
+            if ([[section visibleRowAtRowIndex:ri].tag isEqualToString:tag]) {
+                return [NSIndexPath indexPathForRow:ri inSection:sectionIndex];
+            }
+        }
+        sectionIndex++;
+    }
+    
+    return nil;
+}
+
 - (NSIndexPath *)indexPathForRow:(TFRowDescriptor *)row {
     NSUInteger sectionIndex = [self.sections indexOfObject:row.section];
     NSUInteger rowIndex = [[row.section allRows] indexOfObject:row];
@@ -152,9 +218,19 @@
     
     return [NSIndexPath indexPathForRow:rowIndex inSection:sectionIndex];
 }
+- (NSIndexPath *)indexPathForVisibleRow:(TFRowDescriptor *)row{
+    NSUInteger sectionIndex = [self.allVisibleSections indexOfObject:row.section];
+    NSUInteger rowIndex = [[row.section allVisibleRows] indexOfObject:row];
+    
+    if (sectionIndex == NSNotFound || rowIndex == NSNotFound) {
+        return nil;
+    }
+    
+    return [NSIndexPath indexPathForRow:rowIndex inSection:sectionIndex];
+}
 
 - (UITableViewCell *)cellForRow:(TFRowDescriptor *)row {
-    return [self.tableView cellForRowAtIndexPath:[self indexPathForRow:row]];
+    return [self.tableView cellForRowAtIndexPath:[self indexPathForVisibleRow:row]];
 }
 
 #pragma mark - Lazy initializations
@@ -186,10 +262,10 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
+
     // Return the number of rows in the section.
     
-    return [[self sectionAtSectionIndex:section] numberOfVisibleRows];
+    return [[self visibleSectionAtSectionIndex:section] numberOfVisibleRows];
 }
 
 
@@ -203,9 +279,11 @@
         cellHeight = @0.0;
     }
     
-    TFRowDescriptor *row = [self rowAtIndexPath:indexPath];
+    TFRowDescriptor *row = [self visibleRowAtIndexPath:indexPath];
     
-    if (self.delegate && [self.delegate respondsToSelector:@selector(tableDescriptor:heightForRow:)]) {
+    if (row.cellHeight.floatValue >= 0.0) {
+        return row.cellHeight.floatValue;
+    } else if (self.delegate && [self.delegate respondsToSelector:@selector(tableDescriptor:heightForRow:)]) {
         cellHeight = @([self.delegate tableDescriptor:self heightForRow:row]);
     } else if ([row.rowClass respondsToSelector:@selector(height)]) {
         
@@ -242,7 +320,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    TFRowDescriptor *row = [self rowAtIndexPath:indexPath];
+    TFRowDescriptor *row = [self visibleRowAtIndexPath:indexPath];
     
     
     TFBasicDescriptedCell<TFTableDescriptorConfigurableCellProtocol> *cell = [self.tableView dequeueReusableCellWithIdentifier:[row.rowClass performSelector:@selector(identifier)]];
@@ -268,8 +346,9 @@
 }
 
 - (CGFloat)tableDescriptor:(TFTableDescriptor *)descriptor heightForRow:(TFRowDescriptor *)rowDescriptor {
-    
-    if ([rowDescriptor.rowClass respondsToSelector:@selector(height)]) {
+    if (rowDescriptor.cellHeight.floatValue >= 0.0) {
+        return rowDescriptor.cellHeight.floatValue;
+    } else if ([rowDescriptor.rowClass respondsToSelector:@selector(height)]) {
         return [[rowDescriptor.rowClass performSelector:@selector(height)] floatValue];
     } else if ([rowDescriptor.rowClass respondsToSelector:@selector(identifier)]) {
         return [self calculateDynamicHeightForRow:rowDescriptor];
@@ -283,14 +362,22 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(tableDescriptor:didSelectRow:)]) {
-        [self.delegate tableDescriptor:self didSelectRow:[self rowAtIndexPath:indexPath]];
+        [self.delegate tableDescriptor:self didSelectRow:[self visibleRowAtIndexPath:indexPath]];
+    }
+    
+}
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(tableDescriptor:didDeselectRow:)]) {
+        [self.delegate tableDescriptor:self didDeselectRow:[self visibleRowAtIndexPath:indexPath]];
     }
     
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
-    TFSectionDescriptor *sectionDescriptor = [self sectionAtSectionIndex:section];
+    TFSectionDescriptor *sectionDescriptor = [self visibleSectionAtSectionIndex:section];
     
     TFBasicDescriptedHeaderFooterView *view = nil;
     
@@ -315,7 +402,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
 
-    TFSectionDescriptor *sectionDescriptor = [self sectionAtSectionIndex:section];
+    TFSectionDescriptor *sectionDescriptor = [self visibleSectionAtSectionIndex:section];
     
     if ([sectionDescriptor.sectionHeaderClass respondsToSelector:@selector(height)]) {
         return [[sectionDescriptor.sectionHeaderClass performSelector:@selector(height)] floatValue];
@@ -328,7 +415,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     
-    TFSectionDescriptor *sectionDescriptor = [self sectionAtSectionIndex:section];
+    TFSectionDescriptor *sectionDescriptor = [self visibleSectionAtSectionIndex:section];
     
     TFBasicDescriptedHeaderFooterView *view = nil;
     
@@ -353,7 +440,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     
-    TFSectionDescriptor *sectionDescriptor = [self sectionAtSectionIndex:section];
+    TFSectionDescriptor *sectionDescriptor = [self visibleSectionAtSectionIndex:section];
     
     if ([sectionDescriptor.sectionFooterClass respondsToSelector:@selector(height)]) {
         return [[sectionDescriptor.sectionFooterClass performSelector:@selector(height)] floatValue];
@@ -549,17 +636,96 @@
 - (void)beginUpdates {
     
     [self.tableView beginUpdates];
-    _isBeingUpdated = true;
+    _isBeingUpdated = YES;
 
+}
+
+- (NSMutableArray *)indexPathsToDelete{
+    if (!_indexPathsToDelete) {
+        _indexPathsToDelete = [NSMutableArray array];
+    }
+    return _indexPathsToDelete;
+}
+- (NSMutableArray *)indexPathsToInsert{
+    if (!_indexPathsToInsert) {
+        _indexPathsToInsert = [NSMutableArray array];
+    }
+    return _indexPathsToInsert;
+}
+- (NSMutableArray *)sectionsToDelete{
+    if (!_sectionsToDelete) {
+        _sectionsToDelete = [NSMutableArray array];
+    }
+    return _sectionsToDelete;
+}
+- (NSMutableArray *)sectionsToInsert{
+    if (!_sectionsToInsert) {
+        _sectionsToInsert = [NSMutableArray array];
+    }
+    return _sectionsToInsert;
 }
 
 /// Commit changes in table
 - (void)endUpdates {
     
+    for (NSDictionary *_dictionary in self.indexPathsToDelete) {
+        TFRowDescriptor *row = _dictionary[@"row"];
+        [self updateTableForDeleteAtIndexPath:[self indexPathForVisibleRow:row] rowAnimation:[_dictionary[@"animation"] integerValue]];
+    }
+    for (NSDictionary *_dictionary in self.indexPathsToDelete) {
+        TFRowDescriptor *row = _dictionary[@"row"];
+        row.hidden = YES;
+    }
+    for (NSDictionary *_dictionary in self.indexPathsToInsert) {
+        TFRowDescriptor *row = _dictionary[@"row"];
+        row.hidden = NO;
+        [self updateTableForInsertionAtIndexPath:[self indexPathForVisibleRow:row] rowAnimation:[_dictionary[@"animation"] integerValue]];
+    }
+    
+    for (NSDictionary *_dictionary in self.sectionsToDelete) {
+        TFSectionDescriptor *section = _dictionary[@"section"];
+        [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:[self.allVisibleSections indexOfObject:section]] withRowAnimation:[_dictionary[@"animation"] integerValue]];
+    }
+    for (NSDictionary *_dictionary in self.sectionsToDelete) {
+        TFSectionDescriptor *section = _dictionary[@"section"];
+        section.hidden = YES;
+    }
+    for (NSDictionary *_dictionary in self.sectionsToInsert) {
+        TFSectionDescriptor *section = _dictionary[@"section"];
+        section.hidden = NO;
+        [self.tableView insertSections:[NSIndexSet indexSetWithIndex:[self.allVisibleSections indexOfObject:section]] withRowAnimation:[_dictionary[@"animation"] integerValue]];
+    }
+
+    
+    self.indexPathsToDelete = nil;
+    self.indexPathsToInsert = nil;
+    self.sectionsToDelete = nil;
+    self.sectionsToInsert = nil;
+
     [self.tableView endUpdates];
-    _isBeingUpdated = false;
+    _isBeingUpdated = NO;
     
 }
+
+- (void)addRowForDeleting:(TFRowDescriptor *)row rowAnimation:(UITableViewRowAnimation)rowAnimation{
+    NSAssert(_isBeingUpdated, @"tableDescriptor must be in updating state (call beginUpdates)");
+    [self.indexPathsToDelete addObject:@{@"animation":@(rowAnimation),@"row":row}];
+}
+- (void)addRowForInserting:(TFRowDescriptor *)row rowAnimation:(UITableViewRowAnimation)rowAnimation{
+    NSAssert(_isBeingUpdated, @"tableDescriptor must be in updating state (call beginUpdates)");
+    [self.indexPathsToInsert addObject:@{@"animation":@(rowAnimation),@"row":row}];
+}
+
+- (void)addSectionForDeleting:(TFSectionDescriptor *)section rowAnimation:(UITableViewRowAnimation)rowAnimation{
+    NSAssert(_isBeingUpdated, @"tableDescriptor must be in updating state (call beginUpdates)");
+    [self.sectionsToDelete addObject:@{@"animation":@(rowAnimation),@"section":section}];
+}
+- (void)addSectionForInserting:(TFSectionDescriptor *)section rowAnimation:(UITableViewRowAnimation)rowAnimation{
+    NSAssert(_isBeingUpdated, @"tableDescriptor must be in updating state (call beginUpdates)");
+    [self.sectionsToInsert addObject:@{@"animation":@(rowAnimation),@"section":section}];
+}
+
+#pragma mark - Visibility
 
 - (void)updateCellWithRowDescriptor:(TFRowDescriptor *)row {
     
@@ -573,24 +739,18 @@
     
 }
 
-#pragma mark - Visibility
-
-- (NSInteger)numberOfVisibleSections{
-    return [self allVisibleSections].count;
-}
-
-- (NSIndexPath *)indexPathForVisibleRow:(TFRowDescriptor *)row{
-    NSAssert(row != nil, @"row must not be nil");
+- (void)updateCellHeightWithRowDescriptor:(TFRowDescriptor *)row {
+    NSIndexPath *indexPath = [self indexPathForRow:row];
     
-    NSInteger sectionIndex = [[self allVisibleSections] indexOfObject:row.section];
-    NSInteger rowIndex = [[row.section allVisibleRows] indexOfObject:row];
-    
-    if (sectionIndex == NSNotFound || rowIndex == NSNotFound) {
-        return nil;
+    if (indexPath) {
+        [self invalidCellSizeAtIndexPath:indexPath];
     }
     
-    return [NSIndexPath indexPathForRow:rowIndex inSection:sectionIndex];
+    [self.tableView beginUpdates];
+    [self.tableView endUpdates];
+    
 }
+
 
 #pragma mark - UIScrollView delegate
 
