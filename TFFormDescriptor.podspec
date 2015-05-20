@@ -35,5 +35,6 @@ Pod::Spec.new do |s|
   s.dependency 'TFTableDescriptor'
   #s.dependency 'TFTableDescriptor'
   s.dependency 'EAMTextView'
+  s.dependency 'NSString-Email'
 
 end

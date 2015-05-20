@@ -185,6 +185,32 @@
     [self.tableDescriptor endUpdates];
 }
 
+#pragma mark - Validations
+
+- (BOOL)isValid{
+    BOOL allValid = YES;
+    
+    for (TFRowDescriptor *field in [self.tableDescriptor allRows]) {
+        if (field.formFieldDescriptor && !field.formFieldDescriptor.valid) {
+            allValid = NO;
+        }
+    }
+    
+    return allValid;
+}
+
+- (NSArray *)validationErrors{
+    NSMutableArray *errors = [NSMutableArray array];
+    
+    for (TFRowDescriptor *field in [self.tableDescriptor allRows]) {
+        if (field.formFieldDescriptor && !field.formFieldDescriptor.valid) {
+            [errors addObjectsFromArray:field.formFieldDescriptor.validationErrors];
+        }
+    }
+    
+    return [errors copy];
+}
+
 @end
 
 

@@ -10,7 +10,7 @@
 #import "TFFormBaseField.h"
 #import "TFRowDescriptor+FormFieldReference.h"
 
-@class TFFormSectionDescriptor,TFFormDescriptor;
+@class TFFormSectionDescriptor,TFFormDescriptor,TFFormFieldValidator;
 
 @interface TFFormFieldDescriptor : NSObject
 
@@ -22,5 +22,17 @@
 @property (copy, nonatomic) BOOL (^displayBlock)(TFFormDescriptor *formDescriptor);
 
 + (instancetype)descriptorWithClass:(Class)c configuration:(TFRowConfiguration *)cfg tag:(NSString *)tag;
+
+
+#pragma mark - Validations
+
+@property (readonly, nonatomic, getter=isValid) BOOL valid;
+
+@property (readonly, nonatomic) NSArray *validationErrors;
+
+- (void)addValidator:(TFFormFieldValidator *)validator;
+- (void)addValidators:(NSArray *)validators;
+- (void)removeValidator:(TFFormFieldValidator *)validator;
+- (void)removeValidators:(NSArray *)validators;
 
 @end

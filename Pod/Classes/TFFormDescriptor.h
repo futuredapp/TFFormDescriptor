@@ -60,4 +60,12 @@
 
 - (void)updateContentVisibility;
 
+
+#pragma mark - Validations
+
+@property (readonly, nonatomic, getter=isValid) BOOL valid;
+
+@property (readonly, nonatomic) NSArray *validationErrors;
+
+
 @end

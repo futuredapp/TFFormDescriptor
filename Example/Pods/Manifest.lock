@@ -2,8 +2,10 @@ PODS:
   - EAMTextView (0.0.3)
   - GNKeyboardAwareScrollView (0.1.4)
   - Kiwi (2.3.1)
+  - NSString-Email (0.0.3)
   - TFFormDescriptor (0.0.1):
     - EAMTextView
+    - NSString-Email
     - TFTableDescriptor
   - TFTableDescriptor (2.0.0)
 
@@ -28,7 +30,8 @@ SPEC CHECKSUMS:
   EAMTextView: ff8da8bb4f894c8403e45f1ded47058c80775ae3
   GNKeyboardAwareScrollView: 1d37c543c2189ecbdc77c6bf405ac55507f48d4a
   Kiwi: f038a6c61f7a9e4d7766bff5717aa3b3fdb75f55
-  TFFormDescriptor: 688d354eeca8535ef5c4dd7a9a9847bb55c85e5b
+  NSString-Email: 3c1ff0ace64d7ecc289ea2a5696170c853012252
+  TFFormDescriptor: 0e4d8282a2c8bc84f5f61da10e8ebf94987aa45c
   TFTableDescriptor: b914387ac9f46cad20c74c3e8efe4c70b5325b98
 
 COCOAPODS: 0.37.1

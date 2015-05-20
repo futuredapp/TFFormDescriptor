@@ -18,6 +18,12 @@
 #define COCOAPODS_VERSION_MINOR_Kiwi 3
 #define COCOAPODS_VERSION_PATCH_Kiwi 1
 
+// NSString-Email
+#define COCOAPODS_POD_AVAILABLE_NSString_Email
+#define COCOAPODS_VERSION_MAJOR_NSString_Email 0
+#define COCOAPODS_VERSION_MINOR_NSString_Email 0
+#define COCOAPODS_VERSION_PATCH_NSString_Email 3
+
 // TFFormDescriptor
 #define COCOAPODS_POD_AVAILABLE_TFFormDescriptor
 #define COCOAPODS_VERSION_MAJOR_TFFormDescriptor 0

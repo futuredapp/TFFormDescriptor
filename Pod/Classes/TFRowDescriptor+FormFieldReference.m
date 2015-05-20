@@ -15,11 +15,11 @@
 
 - (TFFormFieldDescriptor *)formFieldDescriptor {
     
-    return objc_getAssociatedObject(self, @selector(formRowDescriptor));
+    return objc_getAssociatedObject(self, @selector(formFieldDescriptor));
 }
 
 - (void)setFormFieldDescriptor:(TFFormFieldDescriptor *)formRowDescriptor {
-    objc_setAssociatedObject(self, @selector(formRowDescriptor), formRowDescriptor, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, @selector(formFieldDescriptor), formRowDescriptor, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 @end
