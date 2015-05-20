@@ -34,13 +34,11 @@
 {
     self = [super init];
     if (self) {
-        self.selectedFieldScrollPosition = UITableViewScrollPositionBottom;
-        
         self.tableDescriptor = [TFTableDescriptor descriptorWithTable:tableView];
         self.tableDescriptor.delegate = self;
         self.tableDescriptor.formDescriptor = self;
         [self registerDefaultFormClasses];
-
+        self.selectedFieldScrollPosition = UITableViewScrollPositionNone;
     }
     return self;
 }
