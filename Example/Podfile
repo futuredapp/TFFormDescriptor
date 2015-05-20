@@ -3,6 +3,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 target 'TFFormDescriptor', :exclusive => true do
   pod "TFTableDescriptor", :git => "https://github.com/thefuntasty/TFTableDescriptor"
   pod "TFFormDescriptor", :path => "../"
+  pod "GNKeyboardAwareScrollView"
 end
 
 target 'Tests', :exclusive => true do

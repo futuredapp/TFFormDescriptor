@@ -25,11 +25,15 @@
 
 @interface TFFormDescriptor : NSObject
 
+@property (nonatomic) UITableViewScrollPosition selectedFieldScrollPosition;
+
 @property (assign, nonatomic) id<TFFormDescriptorDelegate> delegate;
 
 #pragma mark - Inicialization
 
 + (instancetype)descriptorWithTable:(UITableView *)tableView;
+
+- (instancetype)initWithTable:(UITableView *)tableView;
 
 #pragma mark - Adding sections
 

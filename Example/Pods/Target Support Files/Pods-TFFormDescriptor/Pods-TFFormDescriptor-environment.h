@@ -12,6 +12,12 @@
 #define COCOAPODS_VERSION_MINOR_EAMTextView 0
 #define COCOAPODS_VERSION_PATCH_EAMTextView 3
 
+// GNKeyboardAwareScrollView
+#define COCOAPODS_POD_AVAILABLE_GNKeyboardAwareScrollView
+#define COCOAPODS_VERSION_MAJOR_GNKeyboardAwareScrollView 0
+#define COCOAPODS_VERSION_MINOR_GNKeyboardAwareScrollView 1
+#define COCOAPODS_VERSION_PATCH_GNKeyboardAwareScrollView 4
+
 // TFFormDescriptor
 #define COCOAPODS_POD_AVAILABLE_TFFormDescriptor
 #define COCOAPODS_VERSION_MAJOR_TFFormDescriptor 0

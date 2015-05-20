@@ -26,21 +26,21 @@
 
 + (instancetype)descriptorWithTable:(UITableView *)tableView {
     
-    TFFormDescriptor *formDescriptor = [[[self class] alloc] init];
+    return [[[self class] alloc] initWithTable:tableView];
     
-    formDescriptor.tableDescriptor = [TFTableDescriptor descriptorWithTable:tableView];
-    formDescriptor.tableDescriptor.delegate = formDescriptor;
-    formDescriptor.tableDescriptor.formDescriptor = formDescriptor;
-    [formDescriptor registerDefaultFormClasses];
-    
-    return formDescriptor;
 }
 
-- (instancetype)init
+- (instancetype)initWithTable:(UITableView *)tableView
 {
     self = [super init];
     if (self) {
+        self.selectedFieldScrollPosition = UITableViewScrollPositionBottom;
         
+        self.tableDescriptor = [TFTableDescriptor descriptorWithTable:tableView];
+        self.tableDescriptor.delegate = self;
+        self.tableDescriptor.formDescriptor = self;
+        [self registerDefaultFormClasses];
+
     }
     return self;
 }
@@ -77,6 +77,9 @@
     TFFormBaseField *field = (TFFormBaseField *)[descriptor cellForRow:rowDescriptor];
     if ([field isKindOfClass:[TFFormBaseField class]]) {
         [field wasSelected];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.tableDescriptor scrollToRow:rowDescriptor position:self.selectedFieldScrollPosition animated:YES];
+        });
     }
 }
 - (void)tableDescriptor:(TFTableDescriptor *)descriptor didDeselectRow:(TFRowDescriptor *)rowDescriptor {

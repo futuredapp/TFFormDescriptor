@@ -1,5 +1,6 @@
 PODS:
   - EAMTextView (0.0.3)
+  - GNKeyboardAwareScrollView (0.1.4)
   - Kiwi (2.3.1)
   - TFFormDescriptor (0.0.1):
     - EAMTextView
@@ -7,6 +8,7 @@ PODS:
   - TFTableDescriptor (2.0.0)
 
 DEPENDENCIES:
+  - GNKeyboardAwareScrollView
   - Kiwi
   - TFFormDescriptor (from `../`)
   - TFTableDescriptor (from `https://github.com/thefuntasty/TFTableDescriptor`)
@@ -19,11 +21,12 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   TFTableDescriptor:
-    :commit: 239d68d2f19e14e21c6862bb9351b4fdda6eb0ce
+    :commit: 6a5f06b13b43064192b7dfe5c7e5af868ed21165
     :git: https://github.com/thefuntasty/TFTableDescriptor
 
 SPEC CHECKSUMS:
   EAMTextView: ff8da8bb4f894c8403e45f1ded47058c80775ae3
+  GNKeyboardAwareScrollView: 1d37c543c2189ecbdc77c6bf405ac55507f48d4a
   Kiwi: f038a6c61f7a9e4d7766bff5717aa3b3fdb75f55
   TFFormDescriptor: 688d354eeca8535ef5c4dd7a9a9847bb55c85e5b
   TFTableDescriptor: b914387ac9f46cad20c74c3e8efe4c70b5325b98

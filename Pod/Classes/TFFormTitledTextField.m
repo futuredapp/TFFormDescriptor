@@ -31,6 +31,7 @@
 + (TFRowConfiguration *)configurationWithTitle:(NSString *)title placeholder:(NSString *)placeholder{
     
     return [TFRowConfiguration configurationWithBlock:^(TFFormTitledTextField *configuration) {
+        configuration.textField.userInteractionEnabled = NO;
         configuration.titleLabel.text = title;
         if([configuration.titleLabel.text length] == 0) {
             configuration.titleMargin.constant = 0;
@@ -53,10 +54,19 @@
 }
 
 - (void)updateValueData{
-    
     if ([self.valueData isKindOfClass:[NSString class]]) {
         self.textFieldValue = [[NSMutableString alloc] initWithString:self.valueData];
     }
+}
+
+- (void)wasSelected{
+    self.textField.userInteractionEnabled = YES;
+    [self.textField becomeFirstResponder];
+}
+
+- (void)wasDeselected{
+    self.textField.userInteractionEnabled = NO;
+    [self.textField resignFirstResponder];
 }
 
 

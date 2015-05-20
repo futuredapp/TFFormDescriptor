@@ -61,12 +61,14 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "../../Pod/Classes/TFFormTitledSwitchField.xib"
   install_resource "../../Pod/Classes/TFFormTitledTextField.xib"
   install_resource "../../Pod/Classes/TFFormTitledTextViewField.xib"
+  install_resource "${BUILT_PRODUCTS_DIR}/GNKeyboardAwareScrollView.bundle"
   install_resource "${BUILT_PRODUCTS_DIR}/TFTableDescriptor.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "../../Pod/Classes/TFFormTitledSwitchField.xib"
   install_resource "../../Pod/Classes/TFFormTitledTextField.xib"
   install_resource "../../Pod/Classes/TFFormTitledTextViewField.xib"
+  install_resource "${BUILT_PRODUCTS_DIR}/GNKeyboardAwareScrollView.bundle"
   install_resource "${BUILT_PRODUCTS_DIR}/TFTableDescriptor.bundle"
 fi
 
