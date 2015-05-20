@@ -67,5 +67,9 @@
 
 @property (readonly, nonatomic) NSArray *validationErrors;
 
+#pragma mark - Required fields
+
+@property (readonly, nonatomic) NSArray *missingRequiredFields;
+
 
 @end

@@ -24,6 +24,11 @@
 + (instancetype)descriptorWithClass:(Class)c configuration:(TFRowConfiguration *)cfg tag:(NSString *)tag;
 
 
+#pragma mark - Required
+
+@property (nonatomic) BOOL required;
+
+
 #pragma mark - Validations
 
 @property (readonly, nonatomic, getter=isValid) BOOL valid;

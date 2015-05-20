@@ -211,6 +211,32 @@
     return [errors copy];
 }
 
+
+#pragma mark - Required fields
+
+- (NSArray *)missingRequiredFields{
+    NSMutableArray *fields = [NSMutableArray array];
+    
+    for (TFRowDescriptor *row in [self.tableDescriptor allRows]) {
+        TFFormFieldDescriptor *field = row.formFieldDescriptor;
+        if (!field.required) {
+            continue;
+        }
+        BOOL hasFilledValue = YES;
+        if (field.value == nil) {
+            hasFilledValue = NO;
+        }
+        if ([field.value isKindOfClass:[NSString class]] && [field.value length] == 0) {
+            hasFilledValue = NO;
+        }
+        if (!hasFilledValue) {
+            [fields addObject:field];
+        }
+    }
+    
+    return [fields copy];
+}
+
 @end
 
 
