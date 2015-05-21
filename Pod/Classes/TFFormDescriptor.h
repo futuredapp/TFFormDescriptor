@@ -70,6 +70,7 @@
 #pragma mark - Required fields
 
 @property (readonly, nonatomic) NSArray *missingRequiredFields;
+@property (readonly, nonatomic) NSArray *missingRequiredVisibleFields;
 
 
 @end

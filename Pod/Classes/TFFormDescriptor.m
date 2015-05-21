@@ -215,12 +215,18 @@
 #pragma mark - Required fields
 
 - (NSArray *)missingRequiredFields{
-    NSMutableArray *fields = [NSMutableArray array];
-    
-    for (TFRowDescriptor *row in [self.tableDescriptor allRows]) {
-        TFFormFieldDescriptor *field = row.formFieldDescriptor;
+    return [self missingFieldsFromFields:[self.tableDescriptor allRows]];
+}
+
+- (NSArray *)missingRequiredVisibleFields{
+    return [self missingFieldsFromFields:[self.tableDescriptor allVisibleRows]];
+}
+
+- (NSArray *)missingFieldsFromFields:(NSArray *)fields{
+    return [fields filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+        TFFormFieldDescriptor *field = (TFFormFieldDescriptor *)evaluatedObject;
         if (!field.required) {
-            continue;
+            return NO;
         }
         BOOL hasFilledValue = YES;
         if (field.value == nil) {
@@ -229,12 +235,8 @@
         if ([field.value isKindOfClass:[NSString class]] && [field.value length] == 0) {
             hasFilledValue = NO;
         }
-        if (!hasFilledValue) {
-            [fields addObject:field];
-        }
-    }
-    
-    return [fields copy];
+        return !hasFilledValue;
+    }]];
 }
 
 @end
