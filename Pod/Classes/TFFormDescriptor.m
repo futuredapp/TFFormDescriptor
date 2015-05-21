@@ -224,7 +224,7 @@
 
 - (NSArray *)missingFieldsFromFields:(NSArray *)fields{
     return [fields filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
-        TFFormFieldDescriptor *field = (TFFormFieldDescriptor *)evaluatedObject;
+        TFFormFieldDescriptor *field = [(TFRowDescriptor *)evaluatedObject formFieldDescriptor];
         if (!field.required) {
             return NO;
         }
