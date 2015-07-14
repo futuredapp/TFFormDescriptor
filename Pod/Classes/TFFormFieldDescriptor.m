@@ -47,6 +47,14 @@
     _valid = allValid;
 }
 
+
+- (void)setDisplayBlock:(BOOL (^)(TFFormDescriptor *))displayBlock{
+    _displayBlock = displayBlock;
+    if (displayBlock && !self.rowDescriptor.section) {
+        [self.rowDescriptor setHidden:!displayBlock(self.formSectionDescriptor.formDescriptor) checkIfUpdating:YES];
+    }
+}
+
 #pragma mark - Validations
 
 - (NSMutableArray *)validators{

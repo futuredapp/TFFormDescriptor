@@ -23,7 +23,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   TFTableDescriptor:
-    :commit: 6a5f06b13b43064192b7dfe5c7e5af868ed21165
+    :commit: 6f79f1cf1470affa36c1e899c874492cc7445902
     :git: https://github.com/thefuntasty/TFTableDescriptor
 
 SPEC CHECKSUMS:
@@ -32,6 +32,6 @@ SPEC CHECKSUMS:
   Kiwi: f038a6c61f7a9e4d7766bff5717aa3b3fdb75f55
   NSString-Email: 3c1ff0ace64d7ecc289ea2a5696170c853012252
   TFFormDescriptor: 0e4d8282a2c8bc84f5f61da10e8ebf94987aa45c
-  TFTableDescriptor: b914387ac9f46cad20c74c3e8efe4c70b5325b98
+  TFTableDescriptor: b9baee08194262667cb0476e2af7b44a65b64470
 
-COCOAPODS: 0.37.1
+COCOAPODS: 0.37.2
