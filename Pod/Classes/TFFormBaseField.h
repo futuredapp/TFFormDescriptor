@@ -17,6 +17,13 @@ typedef NS_ENUM(TFFormAction, TFFormActionState) {
     TFFormActionStateValueDidChange = 10000
 };
 
+typedef NS_ENUM(NSUInteger, FormCellType) {
+    FormCellTypeStandalone,
+    FormCellTypeFirst,
+    FormCellTypeLast,
+    FormCellTypeRegular
+};
+
 @protocol TFFormBaseCellProtocol <NSObject>
 
 - (void)updateValueData;
