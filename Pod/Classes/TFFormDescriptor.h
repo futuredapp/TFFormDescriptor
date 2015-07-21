@@ -18,7 +18,7 @@
 
 @protocol TFFormDescriptorDelegate <NSObject>
 
-- (void)formDescriptor:(TFFormDescriptor *)formDescriptor didTriggerAction:(TFFormAction)formAction field:(TFFormFieldDescriptor *)field tag:(NSString *)tag;
+- (void)formDescriptor:(TFFormDescriptor *)formDescriptor didTriggerAction:(TFFormAction)formAction field:(TFFormFieldDescriptor *)field key:(NSString *)key;
 
 @end
 
@@ -41,13 +41,13 @@
 
 #pragma mark - Field values
 
-- (id)valueAtFieldWithTag:(NSString *)tag;
+- (id)valueAtFieldWithKey:(NSString *)key;
 - (id)valueAtField:(TFFormFieldDescriptor *)fieldDescriptor;
 
-- (void)setValue:(id)value atFieldWithTag:(NSString *)tag;
+- (void)setValue:(id)value atFieldWithKey:(NSString *)key;
 - (void)setValue:(id)value atField:(TFFormFieldDescriptor *)fieldDescriptor;
 
-/// Values in dictionary where key is row tag
+/// Values in dictionary where key is row key
 - (NSDictionary *)allValues;
 
 - (void)updateValueDataAtField:(TFFormFieldDescriptor *)fieldDescriptor;

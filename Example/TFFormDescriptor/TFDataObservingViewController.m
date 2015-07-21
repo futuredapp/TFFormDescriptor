@@ -27,16 +27,16 @@
     
     TFFormSectionDescriptor *section = [TFFormSectionDescriptor descriptorWithTag:0 data:nil];
     
-    TFFormFieldDescriptor *textField = [TFFormFieldDescriptor descriptorWithClass:[TFFormTitledTextField class] configuration:[TFFormTitledTextField configurationWithTitle:@"Name" placeholder:@"Your name"] tag:@"name"];
+    TFFormFieldDescriptor *textField = [TFFormFieldDescriptor descriptorWithClass:[TFFormTitledTextField class] configuration:[TFFormTitledTextField configurationWithTitle:@"Name" placeholder:@"Your name"] key:@"name"];
     
     [section addRow:textField];
     
-    TFFormFieldDescriptor *hasCarField = [TFFormFieldDescriptor descriptorWithClass:[TFFormTitledSwitchField class] configuration:[TFFormTitledSwitchField configurationWithTitle:@"Do You have car?"] tag:@"hasCar"];
+    TFFormFieldDescriptor *hasCarField = [TFFormFieldDescriptor descriptorWithClass:[TFFormTitledSwitchField class] configuration:[TFFormTitledSwitchField configurationWithTitle:@"Do You have car?"] key:@"hasCar"];
     
     [section addRow:hasCarField];
     
     
-    textField = [TFFormFieldDescriptor descriptorWithClass:[TFFormTitledTextField class] configuration:[TFFormTitledTextField configurationWithTitle:@"Car brand" placeholder:@"fiat, seat, audi, kia, hyundai"] tag:@"carBrand"];
+    textField = [TFFormFieldDescriptor descriptorWithClass:[TFFormTitledTextField class] configuration:[TFFormTitledTextField configurationWithTitle:@"Car brand" placeholder:@"fiat, seat, audi, kia, hyundai"] key:@"carBrand"];
     
     [textField setDisplayBlock:^BOOL(TFFormDescriptor *formDescriptor) {
         NSLog(@"%i",[[hasCarField value] boolValue]);

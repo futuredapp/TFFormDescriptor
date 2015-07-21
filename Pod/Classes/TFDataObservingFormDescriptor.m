@@ -14,7 +14,6 @@
 static void *TFDataObservingFormDescriptorKeyPathContext = &TFDataObservingFormDescriptorKeyPathContext;
 
 @interface TFDataObservingFormDescriptor ()
-@property (copy, nonatomic) NSString *currentlyChangingKey;
 @property (strong, nonatomic) NSMutableArray *observedKeyPaths;
 @property (strong, nonatomic) TFTableDescriptor *tableDescriptor;
 @end
@@ -30,8 +29,8 @@ static void *TFDataObservingFormDescriptorKeyPathContext = &TFDataObservingFormD
     _data = data;
     
     for (TFRowDescriptor *row in [self.tableDescriptor allRows]) {
-        if (row.tag) {
-            [self setValue:[self.data valueForKey:row.tag] atFieldWithTag:row.tag];
+        if (row.formFieldDescriptor.key) {
+            [self setValue:[self.data valueForKey:row.formFieldDescriptor.key] atFieldWithKey:row.formFieldDescriptor.key];
         }
     }
     
@@ -49,9 +48,10 @@ static void *TFDataObservingFormDescriptorKeyPathContext = &TFDataObservingFormD
     if (self.data) {
         self.observedKeyPaths = [NSMutableArray array];
         for (TFRowDescriptor *row in [self.tableDescriptor allRows]) {
-            if (row.formFieldDescriptor && row.tag) {
-                [self.data addObserver:self forKeyPath:row.tag options:0 context:TFDataObservingFormDescriptorKeyPathContext];
-                [self.observedKeyPaths addObject:row.tag];
+            NSString *key = row.formFieldDescriptor.key;
+            if (row.formFieldDescriptor && key && ![self.observedKeyPaths containsObject:key]) {
+                [self.data addObserver:self forKeyPath:key options:0 context:TFDataObservingFormDescriptorKeyPathContext];
+                [self.observedKeyPaths addObject:key];
             }
         }
     }else{
@@ -70,9 +70,9 @@ static void *TFDataObservingFormDescriptorKeyPathContext = &TFDataObservingFormD
 #pragma mark - Data changes
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    if (object == self.data && ![keyPath isEqualToString:self.currentlyChangingKey]) {
-        [self setValue:[object valueForKeyPath:keyPath] atFieldWithTag:keyPath];
+    if (object == self.data) {
         [self updateContentVisibility];
+        [self setValue:[object valueForKeyPath:keyPath] atFieldWithKey:keyPath];
     }
 }
 
@@ -82,7 +82,7 @@ static void *TFDataObservingFormDescriptorKeyPathContext = &TFDataObservingFormD
 
 - (void)triggerAction:(TFFormAction)formAction forField:(TFFormBaseField *)field{
     if (formAction == TFFormActionStateValueDidChange) {
-        [self setDataValue:[field valueData] forKeyPath:field.rowDescriptor.tag];
+        [self setDataValue:[field valueData] forKeyPath:field.rowDescriptor.formFieldDescriptor.key];
     }
     [super triggerAction:formAction forField:field];
 }
@@ -91,13 +91,11 @@ static void *TFDataObservingFormDescriptorKeyPathContext = &TFDataObservingFormD
 }
 
 - (void)setDataValue:(id)value forKeyPath:(NSString *)keyPath{
-    self.currentlyChangingKey = keyPath;
     if([self.data respondsToSelector:@selector(setObject:forKeyedSubscript:)]){
-        self.data[self.currentlyChangingKey] = value;
+        self.data[keyPath] = value;
     }else{
-        [self.data setValue:value forKey:self.currentlyChangingKey];
+        [self.data setValue:value forKey:keyPath];
     }
-    self.currentlyChangingKey = nil;
 }
 
 @end

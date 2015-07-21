@@ -31,23 +31,23 @@ static NSString * const kFieldTagTextView = @"TextViewFieldTag";
     TFFormSectionDescriptor *section = [TFFormSectionDescriptor descriptorWithTag:0 data:nil];
     
     
-    TFFormFieldDescriptor *textField = [TFFormFieldDescriptor descriptorWithClass:[TFFormTitledTextField class] configuration:[TFFormTitledTextField configurationWithTitle:@"Name" placeholder:@"Your name"] tag:kFieldTagTextField];
+    TFFormFieldDescriptor *textField = [TFFormFieldDescriptor descriptorWithClass:[TFFormTitledTextField class] configuration:[TFFormTitledTextField configurationWithTitle:@"Name" placeholder:@"Your name"] key:kFieldTagTextField];
     
     [section addRow:textField];
     
     
     for (int x = 0; x<20; x++) {
-        textField = [TFFormFieldDescriptor descriptorWithClass:[TFFormTitledTextField class] configuration:[TFFormTitledTextField configurationWithTitle:@"Name" placeholder:@"Your name"] tag:[NSString stringWithFormat:@"aaa%i",x]];
+        textField = [TFFormFieldDescriptor descriptorWithClass:[TFFormTitledTextField class] configuration:[TFFormTitledTextField configurationWithTitle:@"Name" placeholder:@"Your name"] key:[NSString stringWithFormat:@"aaa%i",x]];
         
         [section addRow:textField];
     }
     
     
-    TFFormFieldDescriptor *switchField = [TFFormFieldDescriptor descriptorWithClass:[TFFormTitledSwitchField class] configuration:[TFFormTitledSwitchField configurationWithTitle:@"Are you sure?"] tag:kFieldTagSwitch];
+    TFFormFieldDescriptor *switchField = [TFFormFieldDescriptor descriptorWithClass:[TFFormTitledSwitchField class] configuration:[TFFormTitledSwitchField configurationWithTitle:@"Are you sure?"] key:kFieldTagSwitch];
     
     [section addRow:switchField];
 
-    TFFormFieldDescriptor *textViewField = [TFFormFieldDescriptor descriptorWithClass:[TFFormTitledTextViewField class] configuration:[TFFormTitledTextViewField configurationWithTitle:@"Title" placeholder:@"Text view"] tag:kFieldTagTextView];
+    TFFormFieldDescriptor *textViewField = [TFFormFieldDescriptor descriptorWithClass:[TFFormTitledTextViewField class] configuration:[TFFormTitledTextViewField configurationWithTitle:@"Title" placeholder:@"Text view"] key:kFieldTagTextView];
     
     [section addRow:textViewField];
     
@@ -67,14 +67,14 @@ static NSString * const kFieldTagTextView = @"TextViewFieldTag";
 
 #pragma mark - TFFormDescriptor delegate
 
-- (void)formDescriptor:(TFFormDescriptor *)formDescriptor didTriggerAction:(TFFormAction)formAction field:(TFFormFieldDescriptor *)field tag:(NSString *)tag {
+- (void)formDescriptor:(TFFormDescriptor *)formDescriptor didTriggerAction:(TFFormAction)formAction field:(TFFormFieldDescriptor *)field key:(NSString *)key {
     
     if (formAction == TFFormActionStateValueDidChange) {
-        if ([tag isEqualToString:kFieldTagSwitch]) {
+        if ([key isEqualToString:kFieldTagSwitch]) {
             NSLog(@"Value did change: %@", [self.formDescriptor valueAtField:field]);
-        } else if ([tag isEqualToString:kFieldTagTextField]) {
-            NSLog(@"Value is: %@", [self.formDescriptor valueAtField:field]);
-        } else if ([tag isEqualToString:kFieldTagTextView]) {
+        } else if ([key isEqualToString:kFieldTagTextField]) {
+            NSLog(@"key is: %@", [self.formDescriptor valueAtField:field]);
+        } else if ([key isEqualToString:kFieldTagTextView]) {
         //    NSLog(@"Value is: %@", [self.formDescriptor valueAtField:field]);
         }
         

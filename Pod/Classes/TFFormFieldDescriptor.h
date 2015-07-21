@@ -14,6 +14,8 @@
 
 @interface TFFormFieldDescriptor : NSObject
 
+@property (strong, nonatomic) NSString *key;
+
 @property (strong, nonatomic) TFRowDescriptor *rowDescriptor;
 @property (weak, nonatomic) TFFormSectionDescriptor *formSectionDescriptor;
 
@@ -21,7 +23,7 @@
 
 @property (copy, nonatomic) BOOL (^displayBlock)(TFFormDescriptor *formDescriptor);
 
-+ (instancetype)descriptorWithClass:(Class)c configuration:(TFRowConfiguration *)cfg tag:(NSString *)tag;
++ (instancetype)descriptorWithClass:(Class)c configuration:(TFRowConfiguration *)cfg key:(NSString *)key;
 
 
 #pragma mark - Required

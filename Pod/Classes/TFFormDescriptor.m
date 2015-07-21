@@ -88,13 +88,28 @@
 }
 
 
+- (TFFormFieldDescriptor *)firstFieldForKey:(NSString *)key{
+    return [[self fieldsForKey:key] firstObject];
+}
+- (NSArray *)fieldsForKey:(NSString *)key{
+    NSMutableArray *fields = [NSMutableArray array];
+    TFFormFieldDescriptor *desc = nil;
+    for (TFRowDescriptor *row in [self.tableDescriptor allRows]) {
+        if ([row.formFieldDescriptor.key isEqual:key]) {
+            [fields addObject:row.formFieldDescriptor];
+        }
+    }
+    return fields;
+}
 
 #pragma mark - Field value - getters
-- (id)valueAtFieldWithTag:(NSString *)tag {
-    TFRowDescriptor *rowDescriptor = [self.tableDescriptor rowForTag:tag];
-    NSAssert(rowDescriptor != nil, ([NSString stringWithFormat:@"Row with tag %@ not found", tag]));
+- (id)valueAtFieldWithKey:(NSString *)key {
+    NSArray *rows = [self.tableDescriptor allRows];
+    TFFormFieldDescriptor *formField = [self firstFieldForKey:key];
     
-    return [self valueAtField:rowDescriptor.formFieldDescriptor];
+    NSAssert(formField != nil, ([NSString stringWithFormat:@"Row with key %@ not found", key]));
+    
+    return [self valueAtField:formField];
 }
 
 - (id)valueAtField:(TFFormFieldDescriptor *)fieldDescriptor {
@@ -106,10 +121,10 @@
     NSMutableDictionary *mutableDict = [@{} mutableCopy];
     
     for (TFRowDescriptor *rowDescriptor in [self.tableDescriptor allRows]) {
-        if (rowDescriptor.tag) {
+        if (rowDescriptor.formFieldDescriptor.key) {
             id value = [self valueAtField:rowDescriptor.formFieldDescriptor];
             if (value){
-                [mutableDict setObject:value forKey:rowDescriptor.tag];
+                [mutableDict setObject:value forKey:rowDescriptor.formFieldDescriptor.key];
             }
         }
     }
@@ -125,23 +140,21 @@
 }
 
 #pragma mark Field value - settings
-- (void)setValue:(id)value atFieldWithTag:(NSString *)tag{
-    TFRowDescriptor *rowDescriptor = [self.tableDescriptor rowForTag:tag];
-    NSAssert(rowDescriptor != nil, ([NSString stringWithFormat:@"Row with tag %@ not found", tag]));
-    
-//    TFFormBaseField *field = (TFFormBaseField *)[self.tableDescriptor cellForRow:rowDescriptor];
-    NSAssert(rowDescriptor.formFieldDescriptor != nil, ([NSString stringWithFormat:@"Form field for tag %@ not found", tag]));
-    
-    return [self setValue:value atField:rowDescriptor.formFieldDescriptor];
+- (void)setValue:(id)value atFieldWithKey:(NSString *)key{
+    for (TFFormFieldDescriptor *fieldDescriptor in [self fieldsForKey:key]) {
+        
+        NSAssert(fieldDescriptor != nil, ([NSString stringWithFormat:@"Row with key %@ not found", key]));
+        
+        NSAssert(fieldDescriptor != nil, ([NSString stringWithFormat:@"Form field for key %@ not found", key]));
+        
+        [self setValue:value atField:fieldDescriptor];
+    }
 }
 
 - (void)setValue:(id)value atField:(TFFormFieldDescriptor *)fieldDescriptor{
     [self setValue:value atRow:fieldDescriptor.rowDescriptor];
 }
 - (void)setValue:(id)value atRow:(TFRowDescriptor *)rowDescriptor {
-//    TFFormBaseField *field = (TFFormBaseField *)[self.tableDescriptor cellForRow:rowDescriptor];
-//    NSAssert(field != nil, ([NSString stringWithFormat:@"Form field for tag %@ not found", field.rowDescriptor.tag]));
-    
     [rowDescriptor.formFieldDescriptor setValue:value];
     [self updateValueDataAtField:rowDescriptor.formFieldDescriptor];
 }
@@ -150,8 +163,8 @@
 #pragma mark - Actions
 
 - (void)triggerAction:(TFFormAction)formAction forField:(TFFormBaseField *)field{
-    if (self.delegate && [self.delegate respondsToSelector:@selector(formDescriptor:didTriggerAction:field:tag:)]) {
-        [self.delegate formDescriptor:self didTriggerAction:formAction field:field.rowDescriptor.formFieldDescriptor tag:field.rowDescriptor.tag];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(formDescriptor:didTriggerAction:field:key:)]) {
+        [self.delegate formDescriptor:self didTriggerAction:formAction field:field.rowDescriptor.formFieldDescriptor key:field.rowDescriptor.formFieldDescriptor.key];
     }
     if (formAction == TFFormActionStateValueDidChange) {
         [self updateContentVisibility];
@@ -172,7 +185,7 @@
         }else hidden = NO;
         [formSection.sectionDescriptor setHidden:hidden withRowAnimation:UITableViewRowAnimationFade];
     }
-
+    
     for (TFRowDescriptor *row in [self.tableDescriptor allRows]) {
         TFFormFieldDescriptor *fieldDescriptor = row.formFieldDescriptor;
         BOOL hidden = NO;

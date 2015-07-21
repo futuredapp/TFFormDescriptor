@@ -19,10 +19,11 @@
 
 @implementation TFFormFieldDescriptor
 
-+ (instancetype)descriptorWithClass:(Class)c configuration:(TFRowConfiguration *)cfg tag:(NSString *)tag {
++ (instancetype)descriptorWithClass:(Class)c configuration:(TFRowConfiguration *)cfg key:(NSString *)key {
     
     TFFormFieldDescriptor *formRowDescriptor = [[TFFormFieldDescriptor alloc] init];
-    TFRowDescriptor *rowDescriptor = [TFRowDescriptor descriptorWithRowClass:c data:cfg tag:tag];
+    formRowDescriptor.key = key;
+    TFRowDescriptor *rowDescriptor = [TFRowDescriptor descriptorWithRowClass:c data:cfg tag:nil];
     rowDescriptor.formFieldDescriptor = formRowDescriptor;
     formRowDescriptor.rowDescriptor = rowDescriptor;
     
@@ -32,7 +33,7 @@
 
 -(void)setValue:(id)value{
     _value = value;
-
+    
     BOOL allValid = YES;
     NSMutableArray *errors = [NSMutableArray array];
     for (TFFormFieldValidator *validator in self.validators) {
